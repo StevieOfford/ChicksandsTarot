@@ -82,26 +82,26 @@ function App() {
   const apiUrl = 'https://cpif4zh0bf.execute-api.eu-north-1.amazonaws.com/prod'; // <<< PASTE YOUR URL HERE
 
   // Handle card selection for a specific position in Celtic Cross
-  const handleCardSelect = useCallback((positionId, cardId) => {
-    setCelticCrossSelections(prevSelections =>
-      prevSelections.map(selection =>
-        selection.id === positionId ? { ...selection, cardId: cardId } : selection
-      )
-    );
-    setReadMessage(''); // Clear messages on new selection
-    setLlmInterpretation('');
-  }, []);
+  const handleCardSelect = useCallback((positionId: string, cardId: string) => {
+  setCelticCrossSelections(prevSelections =>
+    prevSelections.map(selection =>
+      selection.id === positionId ? { ...selection, cardId: cardId } : selection
+    )
+  );
+  setReadMessage('');
+  setLlmInterpretation('');
+}, []);
 
   // Handle orientation selection for a specific position in Celtic Cross
-  const handleOrientationSelect = useCallback((positionId, orientation) => {
-    setCelticCrossSelections(prevSelections =>
-      prevSelections.map(selection =>
-        selection.id === positionId ? { ...selection, orientation: orientation } : selection
-      )
-    );
-    setReadMessage(''); // Clear messages on new orientation
-    setLlmInterpretation('');
-  }, []);
+  const handleOrientationSelect = useCallback((positionId: string, orientation: 'upright' | 'reversed') => {
+  setCelticCrossSelections(prevSelections =>
+    prevSelections.map(selection =>
+      selection.id === positionId ? { ...selection, orientation: orientation } : selection
+    )
+  );
+  setReadMessage('');
+  setLlmInterpretation('');
+}, []);
 
   // Fetch individual card meaning from LLM for Tab 2 via AWS Lambda proxy
   const fetchCardMeaning = useCallback(async (cardName) => {
