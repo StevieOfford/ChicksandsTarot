@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useState, useEffect, useCallback } from 'react';
 
 // Tarot card data - Simplified as meanings will be fetched dynamically.
@@ -104,7 +105,7 @@ function App() {
 }, []);
 
   // Fetch individual card meaning from LLM for Tab 2 via AWS Lambda proxy
-  const fetchCardMeaning = useCallback(async (cardName) => {
+  const fetchCardMeaning = useCallback(async (cardName: string) => {
     if (!cardName) {
       setCardMeaningText('Select a card to see its meaning.');
       return;
@@ -207,7 +208,7 @@ function App() {
   }, []);
 
   // Handles changing tabs
-  const handleTabChange = useCallback((tabName) => {
+  const handleTabChange = useCallback((tabName: string) => {
     setActiveTab(tabName);
     // When switching to Card Meanings tab, reset the selected card meaning display
     if (tabName === 'cardSelection') {
