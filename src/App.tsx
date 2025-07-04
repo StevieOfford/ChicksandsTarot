@@ -161,7 +161,7 @@ const zodiacSignsData = [
   { id: 'scorpio', name: 'Scorpio', symbol: '♏', description: 'Scorpio is a Water sign ruled by Pluto (and Mars), representing intensity, transformation, and power. Scorpios are passionate, mysterious, and deeply emotional, with a strong intuition. They are fiercely determined but can also be secretive and possessive.' },
   { id: 'sagittarius', name: 'Sagittarius', symbol: '♐', description: 'Sagittarius, a Fire sign ruled by Jupiter, embodies adventure, optimism, and a love for freedom. Sagittarians are philosophical, enthusiastic, and always seeking new experiences. They are honest but can be tactless and restless.' },
   { id: 'capricorn', name: 'Capricorn', symbol: '♑', description: 'Capricorn is an Earth sign ruled by Saturn, symbolizing discipline, ambition, and responsibility. Capricorns are practical, patient, and driven to achieve their goals. They are reliable but can be rigid and overly serious.' },
-  { id: 'aquarius', name: 'Aquarius', symbol: '♒', description: 'Aquarius, an Air sign ruled by Uranus (and Saturn), represents innovation, independence, and humanitarianism. Aquarians are intellectual, progressive, and value freedom and equality. They can be eccentric and detached but are visionaries.' }, // Removed 'федерации.' here
+  { id: 'aquarius', name: 'Aquarius', symbol: '♒', description: 'Aquarius, an Air sign ruled by Uranus (and Saturn), represents innovation, independence, and humanitarianism. Aquarians are intellectual, progressive, and value freedom and equality. They can be eccentric and detached but are visionaries.' },
   { id: 'pisces', name: 'Pisces', symbol: '♓', description: 'Pisces is a Water sign ruled by Neptune (and Jupiter), symbolizing compassion, intuition, and artistic sensitivity. Pisceans are dreamy, empathetic, and highly imaginative. They can be escapist and overly sensitive but possess deep spiritual wisdom.' },
 ];
 
@@ -822,7 +822,9 @@ function App() {
       {showHomeScreen && (
         <div className="fixed inset-0 bg-black bg-opacity-95 flex flex-col items-center justify-center p-4 z-50">
           <h1 className="text-5xl sm:text-6xl font-bold mb-6 text-center text-white animate-pulse">Chicksands Tarot</h1>
-          <div className="bg-purple-900 p-8 rounded-xl shadow-2xl border border-purple-700 max-w-2xl text-center">
+          {/* Main content box: now with max-height and overflow-y-auto */}
+          <div className="bg-purple-900 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-700 max-w-2xl text-center
+                          max-h-[70vh] overflow-y-auto flex flex-col items-center justify-center"> {/* Adjusted max-h and added flex for centering content within scrollable area */}
             <h2 className="text-3xl font-semibold mb-4 text-purple-200">Embrace the Wisdom of Pagan Divination</h2>
             <p className="text-lg text-purple-300 mb-6 leading-relaxed">
               Welcome to Chicksands Tarot, your digital sanctuary for exploring the ancient art of divination. Rooted in the rich traditions of Paganism, this app offers a unique journey into self-discovery and spiritual insight.
@@ -831,13 +833,14 @@ function App() {
               <br /><br />
               Here, you can delve into various tarot spreads, explore the significance of the elements, and understand the influence of the zodiac, all guided by intuitive AI interpretations.
             </p>
-            <button
-              className="px-10 py-4 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 text-xl"
-              onClick={() => setShowHomeScreen(false)}
-            >
-              Enter the Sanctuary
-            </button>
           </div>
+          {/* Button is now outside the scrollable content box, but still within the main flex container */}
+          <button
+            className="mt-6 px-10 py-4 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 text-xl"
+            onClick={() => setShowHomeScreen(false)}
+          >
+            Enter the Sanctuary
+          </button>
         </div>
       )}
 
@@ -853,19 +856,20 @@ function App() {
             ☰ Menu
           </button>
 
-          {/* Menu Sidebar */}
-          <Menu
-            menuItems={menuItems}
-            selectedItem={selectedMenuItem}
-            onSelect={handleMenuItemSelect}
-            isMenuOpen={isMenuOpen}
-            onToggleMenu={toggleMenu}
-          />
-
           {/* Main Content Area */}
+          {/* Added pt-20 to push content down on small screens to avoid overlap with fixed menu button */}
           <div className={`flex-1 p-4 sm:p-8 flex flex-col items-center transition-all duration-300 ease-in-out
-                          ${isMenuOpen ? 'sm:ml-64' : 'sm:ml-0'} `}> {/* Adjust margin for desktop menu */}
+                          ${isMenuOpen ? 'sm:ml-64' : 'sm:ml-0'} pt-20 sm:pt-8`}> {/* Adjusted padding-top for mobile */}
             <h1 className="text-4xl sm:text-5xl font-bold mb-8 text-center text-white">Chicksands Tarot</h1>
+
+            {/* Menu Sidebar - Moved here to ensure it's rendered after the main content adjustment */}
+            <Menu
+              menuItems={menuItems}
+              selectedItem={selectedMenuItem}
+              onSelect={handleMenuItemSelect}
+              isMenuOpen={isMenuOpen}
+              onToggleMenu={toggleMenu}
+            />
 
             {renderContent()}
           </div>
