@@ -44,37 +44,37 @@ const allTarotCards = [
 
 // Represents the 12 positions of the Celtic Cross and Staff spread
 const celticCrossPositions = [
-  { id: '1', name: '1. Past' },
-  { id: '2', name: '2. Present' },
-  { id: '3', name: '3. What got you here' },
-  { id: '4', 'name': '4. Obstacle' },
-  { id: '5', name: '5. What\'s next' },
-  { id: '6', name: '6. Future' },
-  { id: '7', name: '7. You/Yourself' },
-  { id: '8', name: '8. External Influence' },
-  { id: '9', name: '9. What you need to know' },
-  { id: '10', name: '10. Outcome 1' },
-  { id: '11', name: '11. Outcome 2' },
-  { id: '12', name: '12. Outcome 3' },
+  { id: 1, name: '1. Past' }, // Changed to number
+  { id: 2, name: '2. Present' }, // Changed to number
+  { id: 3, name: '3. What got you here' }, // Changed to number
+  { id: 4, 'name': '4. Obstacle' }, // Changed to number
+  { id: 5, name: '5. What\'s next' }, // Changed to number
+  { id: 6, name: '6. Future' }, // Changed to number
+  { id: 7, name: '7. You/Yourself' }, // Changed to number
+  { id: 8, name: '8. External Influence' }, // Changed to number
+  { id: 9, name: '9. What you need to know' }, // Changed to number
+  { id: 10, name: '10. Outcome 1' }, // Changed to number
+  { id: 11, name: '11. Outcome 2' }, // Changed to number
+  { id: 12, name: '12. Outcome 3' }, // Changed to number
 ];
 
 // New: Positions for Three Card Spread
 const threeCardPositions = [
-  { id: '1', name: '1. Past' },
-  { id: '2', name: '2. Present' },
-  { id: '3', name: '3. Future' },
+  { id: 1, name: '1. Past' }, // Changed to number
+  { id: 2, name: '2. Present' }, // Changed to number
+  { id: 3, name: '3. Future' }, // Changed to number
 ];
 
 // New: Positions for Heart and Head Spread (based on your image)
 const heartAndHeadPositions = [
-  { id: '1', name: '1. Your Spiritual Self' },
-  { id: '2', name: '2. What You Think' },
-  { id: '3', name: '3. What You Feel' },
-  { id: '4', name: '4. The Heart of the Matter' },
+  { id: 1, name: '1. Your Spiritual Self' }, // Changed to number
+  { id: 2, name: '2. What You Think' }, // Changed to number
+  { id: 3, name: '3. What You Feel' }, // Changed to number
+  { id: 4, name: '4. The Heart of the Matter' }, // Changed to number
 ];
 
 
-// --- Menu Structure Data ---
+// --- Updated: Menu Structure Data ---
 const menuItems = [
   {
     id: 'tarot',
@@ -347,7 +347,7 @@ function App() {
   const apiUrl = 'https://cpif4zh0bf.execute-api.eu-north-1.amazonaws.com/prod'; // <<< PASTE YOUR URL HERE
 
   // Handle card selection for a specific position in Celtic Cross
-  const handleCardSelect = useCallback((positionId: string, cardId: string) => {
+  const handleCardSelect = useCallback((positionId: number, cardId: string) => { // Changed positionId to number
     setCelticCrossSelections(prevSelections =>
       prevSelections.map(selection =>
         selection.id === positionId ? { ...selection, cardId: cardId } : selection
@@ -358,7 +358,7 @@ function App() {
   }, []);
 
   // Handle orientation selection for a specific position in Celtic Cross
-  const handleOrientationSelect = useCallback((positionId: string, orientation: 'upright' | 'reversed') => {
+  const handleOrientationSelect = useCallback((positionId: number, orientation: 'upright' | 'reversed') => { // Changed positionId to number
     setCelticCrossSelections(prevSelections =>
       prevSelections.map(selection =>
         selection.id === positionId ? { ...selection, orientation: orientation } : selection
@@ -415,7 +415,7 @@ function App() {
 
 
   // Generate the reading message based on selected cards for Spreads via AWS Lambda proxy
-  const generateRead = useCallback(async (spreadType: string, spreadPositions: {id: string; name: string}[], selections: typeof celticCrossSelections) => {
+  const generateRead = useCallback(async (spreadType: string, spreadPositions: {id: number; name: string}[], selections: typeof celticCrossSelections) => { // Changed id to number
     const selectedCardsDetails = selections
       .filter(selection => selection.cardId)
       .map(selection => {
@@ -493,19 +493,6 @@ function App() {
   // --- Render Content Based on Selected Menu Item ---
   const renderContent = () => {
     // Helper to find parent category name for display in placeholders
-    const getParentCategoryName = (itemId: string) => {
-      for (const category of menuItems) {
-        if (category.subItems) {
-          if (category.subItems.some(sub => sub.id === itemId)) {
-            return category.name;
-          }
-        } else if (category.id === itemId) {
-          return category.name; // For top-level items without sub-items
-        }
-      }
-      return ''; // Fallback
-    };
-
     const currentItemName = menuItems.find(m => m.id === selectedMenuItem)?.name ||
                             menuItems.find(m => m.subItems?.some(s => s.id === selectedMenuItem))?.subItems?.find(s => s.id === selectedMenuItem)?.name ||
                             '';
@@ -743,7 +730,7 @@ function App() {
           </div>
         );
 
-      // --- New: Witches Runes Content ---
+      // --- Witches Runes Content ---
       case 'witchesRunes':
         return (
           <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
