@@ -18,7 +18,7 @@ const allTarotCards = [
   { id: 'justice', name: 'Justice' },
   { id: 'hanged-man', name: 'The Hanged Man' },
   { id: 'death', name: 'The Death' },
-  { id: 'temperance', name: 'Temperance' },
+  { id: 'temperance', 'name': 'Temperance' },
   { id: 'devil', name: 'The Devil' },
   { id: 'tower', name: 'The Tower' },
   { id: 'star', name: 'The Star' },
@@ -44,33 +44,108 @@ const allTarotCards = [
 
 // Represents the 12 positions of the Celtic Cross and Staff spread
 const celticCrossPositions = [
-  { id: '1', name: '1. Past' },
-  { id: '2', name: '2. Present' },
-  { id: '3', name: '3. What got you here' },
-  { id: '4', 'name': '4. Obstacle' },
-  { id: '5', name: '5. What\'s next' },
-  { id: '6', name: '6. Future' },
-  { id: '7', name: '7. You/Yourself' },
-  { id: '8', name: '8. External Influence' },
-  { id: '9', name: '9. What you need to know' },
-  { id: '10', name: '10. Outcome 1' },
-  { id: '11', name: '11. Outcome 2' },
-  { id: '12', name: '12. Outcome 3' },
+  { id: 1, name: '1. Past' },
+  { id: 2, name: '2. Present' },
+  { id: 3, name: '3. What got you here' },
+  { id: 4, 'name': '4. Obstacle' },
+  { id: 5, name: '5. What\'s next' },
+  { id: 6, name: '6. Future' },
+  { id: 7, name: '7. You/Yourself' },
+  { id: 8, name: '8. External Influence' },
+  { id: 9, name: '9. What you need to know' },
+  { id: 10, name: '10. Outcome 1' },
+  { id: 11, name: '11. Outcome 2' },
+  { id: 12, name: '12. Outcome 3' },
 ];
 
-// New: Positions for Three Card Spread
+// Positions for Three Card Spread
 const threeCardPositions = [
-  { id: '1', name: '1. Past' },
-  { id: '2', name: '2. Present' },
-  { id: '3', name: '3. Future' },
+  { id: 1, name: '1. Past' },
+  { id: 2, name: '2. Present' },
+  { id: 3, name: '3. Future' },
 ];
 
-// New: Positions for Heart and Head Spread (based on your image)
+// Positions for Heart and Head Spread
 const heartAndHeadPositions = [
-  { id: '1', name: '1. Your Spiritual Self' },
-  { id: '2', name: '2. What You Think' },
-  { id: '3', name: '3. What You Feel' },
-  { id: '4', name: '4. The Heart of the Matter' },
+  { id: 1, name: '1. Your Spiritual Self' },
+  { id: 2, name: '2. What You Think' },
+  { id: 3, name: '3. What You Feel' },
+  { id: 4, name: '4. The Heart of the Matter' },
+];
+
+// Positions for Past, Present & Future Spread (same as Three Card, but distinct name)
+const pastPresentFuturePositions = [
+  { id: 1, name: '1. Past' },
+  { id: 2, name: '2. Present' },
+  { id: 3, name: '3. Future' },
+];
+
+// Positions for Tree of Life Spread (simplified for now)
+const treeOfLifePositions = [
+  { id: 1, name: '1. Kether (Crown)' },
+  { id: 2, name: '2. Chokmah (Wisdom)' },
+  { id: 3, name: '3. Binah (Understanding)' },
+  { id: 4, name: '4. Chesed (Mercy)' },
+  { id: 5, name: '5. Geburah (Strength)' },
+  { id: 6, name: '6. Tiphareth (Beauty)' },
+  { id: 7, name: '7. Netzach (Victory)' },
+  { id: 8, name: '8. Hod (Glory)' },
+  { id: 9, name: '9. Yesod (Foundation)' },
+  { id: 10, name: '10. Malkuth (Kingdom)' },
+];
+
+// Positions for Horseshoe Spread (simplified for now)
+const horseshoePositions = [
+  { id: 1, name: '1. Past Influences' },
+  { id: 2, name: '2. Present Situation' },
+  { id: 3, name: '3. Hidden Influences' },
+  { id: 4, name: '4. Obstacles' },
+  { id: 5, name: '5. Your Path' },
+  { id: 6, name: '6. External Influences' },
+  { id: 7, name: '7. Outcome' },
+];
+
+// Positions for Year Ahead Spread (simplified for now)
+const yearAheadPositions = Array.from({ length: 12 }, (_, i) => ({
+  id: i + 1, name: `${i + 1}. Month ${i + 1}`
+}));
+
+// Positions for Month Ahead Spread (simplified for now)
+const monthAheadPositions = Array.from({ length: 4 }, (_, i) => ({
+  id: i + 1, name: `${i + 1}. Week ${i + 1}`
+}));
+
+// Positions for Week Ahead Spread (simplified for now)
+const weekAheadPositions = Array.from({ length: 7 }, (_, i) => ({
+  id: i + 1, name: `${i + 1}. Day ${i + 1}`
+}));
+
+// Positions for Star Spread (simplified for now)
+const starSpreadPositions = [
+  { id: 1, name: '1. You' },
+  { id: 2, name: '2. Your Hopes' },
+  { id: 3, name: '3. Your Fears' },
+  { id: 4, name: '4. Your Strengths' },
+  { id: 5, name: '5. Your Weaknesses' },
+  { id: 6, name: '6. The Path Forward' },
+];
+
+// NEW: Positions for Deck Interview Spread (6 cards)
+const deckInterviewPositions = [
+  { id: 1, name: '1. What is your most important characteristic?' },
+  { id: 2, name: '2. What are your strengths as a deck?' },
+  { id: 3, name: '3. What are your weaknesses as a deck?' },
+  { id: 4, name: '4. What can you teach me?' },
+  { id: 5, name: '5. How can I best learn from you?' },
+  { id: 6, name: '6. What is our potential together?' },
+];
+
+// NEW: Positions for Deck Bonding Spread (4 cards)
+const deckBondingPositions = [
+  { id: 1, name: '1. What energy do I bring to this deck?' },
+  { id: 2, name: '2. What energy does this deck bring to me?' },
+  { id: 3, name: '3. How can we communicate more clearly?' },
+  { id: 4, name: '4. How can we grow together?' },
 ];
 
 
@@ -90,6 +165,15 @@ const menuItems = [
       { id: 'yearAhead', name: 'Year Ahead' },
       { id: 'monthAhead', name: 'Month Ahead' },
       { id: 'weekAhead', name: 'Week Ahead' },
+      // NEW: Your Deck Sub-category
+      {
+        id: 'yourDeck',
+        name: 'Your Deck',
+        subItems: [
+          { id: 'deckInterview', name: 'Deck Interview' },
+          { id: 'deckBonding', name: 'Deck Bonding' },
+        ],
+      },
       { id: 'cardMeanings', name: 'Card Meanings' },
     ],
   },
@@ -149,7 +233,7 @@ const menuItems = [
   },
 ];
 
-// --- Zodiac Signs Data (no change) ---
+// --- Zodiac Signs Data (FIXED: Removed extraneous '错了。') ---
 const zodiacSignsData = [
   { id: 'aries', name: 'Aries', symbol: '♈', description: 'Aries, the first sign of the zodiac, is known for its pioneering spirit, courage, and enthusiasm. Ruled by Mars, they are natural leaders, assertive, and driven by passion. They can be impulsive but are also incredibly energetic and direct.' },
   { id: 'taurus', name: 'Taurus', symbol: '♉', description: 'Taurus is an Earth sign, symbolizing stability, practicality, and determination. Ruled by Venus, they appreciate beauty, comfort, and luxury. Taureans are known for their patience and persistence, but can also be stubborn and resistant to change.' },
@@ -180,6 +264,54 @@ const witchesRunesData = [
   { id: 'man', name: 'Man', symbol: '♂️', description: 'Represents masculine energy, action, logic, and the self. It can refer to a male figure or active principles.' },
   { id: 'woman', name: 'Woman', symbol: '♀️', description: 'Represents feminine energy, intuition, nurturing, and receptivity. It can refer to a female figure or passive principles.' },
   { id: 'crossroads', name: 'Crossroads', symbol: '➕', description: 'A more direct symbol for choices, decisions, and the intersection of paths. Similar to Crossed Lines but often more about a clear path forward.' },
+];
+
+// NEW: Elder Futhark Runes Data (24 runes)
+const elderFutharkRunesData = [
+  { id: 'fehu', name: 'Fehu', symbol: 'ᚠ', description: 'Cattle, wealth, abundance, financial strength, new beginnings.' },
+  { id: 'uruz', name: 'Uruz', symbol: 'ᚢ', description: 'Wild ox, strength, untamed potential, raw power, good health.' },
+  { id: 'thurisaz', name: 'Thurisaz', symbol: 'ᚦ', description: 'Thorn, giant, protection, destructive force, conflict, challenge.' },
+  { id: 'ansuz', name: 'Ansuz', symbol: 'ᚨ', description: 'God, Odin, communication, inspiration, divine insight, wisdom.' },
+  { id: 'raidho', name: 'Raidho', symbol: 'ᚱ', description: 'Journey, ride, travel, movement, progress, rhythm.' },
+  { id: 'kenaz', name: 'Kenaz', symbol: 'ᚲ', description: 'Torch, vision, knowledge, creativity, enlightenment, warmth.' },
+  { id: 'gebo', name: 'Gebo', symbol: 'ᚷ', description: 'Gift, partnership, generosity, balance, exchange, union.' },
+  { id: 'wunjo', name: 'Wunjo', symbol: 'ᚹ', description: 'Joy, comfort, pleasure, harmony, fellowship, success.' },
+  { id: 'hagalaz', name: 'Hagalaz', symbol: 'ᚺ', description: 'Hail, disruption, crisis, destructive natural forces, uncontrolled change.' },
+  { id: 'naudiz', name: 'Naudiz', symbol: 'ᚾ', description: 'Need, necessity, constraint, distress, patience, endurance.' },
+  { id: 'isa', name: 'Isa', symbol: 'ᛁ', description: 'Ice, stagnation, standstill, challenge, introspection, clarity.' },
+  { id: 'jera', name: 'Jera', symbol: 'ᛃ', description: 'Year, harvest, cycles, reward, peace, good results.' },
+  { id: 'eihwaz', name: 'Eihwaz', symbol: 'ᛇ', description: 'Yew tree, strength, reliability, endurance, transformation, death and rebirth.' },
+  { id: 'perthro', name: 'Perthro', symbol: 'ᛈ', description: 'Lot cup, mystery, fate, hidden knowledge, chance, secrets.' },
+  { id: 'algiz', name: 'Algiz', symbol: 'z', description: 'Elk, protection, defense, guardian, spiritual connection, divine blessing.' },
+  { id: 'sowilo', name: 'Sowilo', symbol: 'ᛊ', description: 'Sun, success, honor, wholeness, life force, victory.' },
+  { id: 'tiwaz', name: 'Tiwaz', symbol: 'ᛏ', description: 'Tyr, justice, sacrifice, victory, leadership, courage.' },
+  { id: 'berkano', name: 'Berkano', symbol: 'ᛒ', description: 'Birch goddess, growth, new beginnings, fertility, regeneration.' },
+  { id: 'ehwaz', name: 'Ehwaz', symbol: 'ᛖ', description: 'Horse, movement, progress, partnership, trust, loyalty.' },
+  { id: 'mannaz', name: 'Mannaz', symbol: 'ᛗ', description: 'Man, humanity, self, community, social order, intelligence.' },
+  { id: 'laguz', name: 'Laguz', symbol: 'ᛚ', description: 'Water, flow, intuition, emotions, dreams, subconscious.' },
+  { id: 'ingwaz', name: 'Ingwaz', symbol: 'ᛝ', description: 'Ing, fertility, new ideas, completion, security, inner growth.' },
+  { id: 'dagaz', name: 'Dagaz', symbol: 'ᛞ', description: 'Day, breakthrough, awakening, hope, transformation, new cycle.' },
+  { id: 'othala', name: 'Othala', symbol: 'ᛟ', description: 'Inheritance, homeland, property, ancestry, spiritual heritage, tradition.' },
+];
+
+// NEW: Younger Futhark Runes Data (16 runes)
+const youngerFutharkRunesData = [
+  { id: 'fe', name: 'Fé', symbol: 'ᚠ', description: 'Wealth, cattle, prosperity, material possessions.' },
+  { id: 'ur', name: 'Úr', symbol: 'ᚢ', description: 'Iron, dross, rain, primeval mist, strength, origin.' },
+  { id: 'thurs', name: 'Þurs', symbol: 'ᚦ', description: 'Giant, thorn, danger, defense, conflict, power.' },
+  { id: 'ass', name: 'Ass', symbol: 'ᚬ', description: 'God, mouth, communication, wisdom, inspiration, divine breath.' },
+  { id: 'reidh', name: 'Reið', symbol: 'ᚱ', description: 'Journey, ride, travel, progress, counsel, order.' },
+  { id: 'kaun', name: 'Kaun', symbol: 'ᚴ', description: 'Ulcer, torch, disease, death, but also knowledge, light.' },
+  { id: 'hagall', name: 'Hagall', symbol: 'ᚼ', description: 'Hail, destructive forces, crisis, uncontrolled events, transformation.' },
+  { id: 'naudh', name: 'Nauð', symbol: 'ᚾ', description: 'Need, distress, constraint, necessity, endurance, patience.' },
+  { id: 'is', name: 'Ís', symbol: 'ᛁ', description: 'Ice, stagnation, standstill, challenge, introspection, self-preservation.' },
+  { id: 'ar', name: 'Ár', symbol: 'ᛅ', description: 'Year, harvest, good season, peace, abundance, good results.' },
+  { id: 'sol', name: 'Sól', symbol: 'ᛋ', description: 'Sun, victory, success, honor, life force, enlightenment.' },
+  { id: 'tyr', name: 'Týr', symbol: 'ᛏ', description: 'Tyr, justice, sacrifice, victory, leadership, courage.' },
+  { id: 'bjarkan', name: 'Bjarkan', symbol: 'ᛒ', description: 'Birch, growth, new beginnings, fertility, family, regeneration.' },
+  { id: 'madhr', name: 'Maðr', symbol: 'ᛘ', description: 'Man, humanity, self, community, social order, intelligence.' },
+  { id: 'logr', name: 'Logr', symbol: 'ᛚ', description: 'Water, lake, flow, intuition, emotions, dreams, subconscious.' },
+  { id: 'yr', name: 'Ýr', symbol: 'ᛦ', description: 'Yew, bow, death, transformation, reliability, defense.' },
 ];
 
 
@@ -238,13 +370,43 @@ const Menu: React.FC<MenuProps> = ({ menuItems, selectedItem, onSelect, isMenuOp
                     <ul className="ml-4 mt-2 border-l border-purple-700 pl-3">
                       {item.subItems.map(subItem => (
                         <li key={subItem.id} className="mb-1">
-                          <button
-                            onClick={() => { onSelect(subItem.id); onToggleMenu(); }} // Close menu on selection
-                            className={`w-full text-left py-2 px-3 rounded-md text-base transition-colors duration-200
-                                        ${selectedItem === subItem.id ? 'bg-purple-700 text-white font-medium' : 'hover:bg-purple-800'}`}
-                          >
-                            {subItem.name}
-                          </button>
+                          {subItem.subItems ? ( // Check for sub-sub-items
+                            <div>
+                              <button
+                                onClick={() => toggleSection(subItem.id)}
+                                className="w-full text-left flex justify-between items-center py-2 px-3 rounded-md
+                                           bg-purple-800 hover:bg-purple-700 font-semibold text-base focus:outline-none"
+                              >
+                                {subItem.name}
+                                <span className="text-xl">
+                                  {openSections.includes(subItem.id) ? '▲' : '▼'}
+                                </span>
+                              </button>
+                              {openSections.includes(subItem.id) && (
+                                <ul className="ml-4 mt-2 border-l border-purple-700 pl-3">
+                                  {subItem.subItems.map(subSubItem => (
+                                    <li key={subSubItem.id} className="mb-1">
+                                      <button
+                                        onClick={() => { onSelect(subSubItem.id); onToggleMenu(); }}
+                                        className={`w-full text-left py-2 px-3 rounded-md text-sm transition-colors duration-200
+                                                    ${selectedItem === subSubItem.id ? 'bg-purple-700 text-white font-medium' : 'hover:bg-purple-800'}`}
+                                      >
+                                        {subSubItem.name}
+                                      </button>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => { onSelect(subItem.id); onToggleMenu(); }}
+                              className={`w-full text-left py-2 px-3 rounded-md text-base transition-colors duration-200
+                                          ${selectedItem === subItem.id ? 'bg-purple-700 text-white font-medium' : 'hover:bg-purple-800'}`}
+                            >
+                              {subItem.name}
+                            </button>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -267,7 +429,7 @@ const Menu: React.FC<MenuProps> = ({ menuItems, selectedItem, onSelect, isMenuOp
   );
 };
 
-// --- SVG Card Layout Components (no change) ---
+// --- SVG Card Layout Components ---
 
 interface CardPositionProps {
   x: number;
@@ -284,7 +446,8 @@ const CardPosition: React.FC<CardPositionProps> = ({ x, y, label, rotation = 0 }
 );
 
 const CelticCrossLayout: React.FC = () => (
-  <svg viewBox="0 0 400 300" className="w-full h-auto max-h-96 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
+  // Increased viewBox width from 400 to 450, adjusted x for staff cards
+  <svg viewBox="0 0 450 300" className="w-full h-auto max-h-96 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
     {/* Center Cross */}
     <CardPosition x="180" y="150" label="1" /> {/* Present */}
     <CardPosition x="220" y="150" label="2" rotation={90} /> {/* What crosses you */}
@@ -293,13 +456,13 @@ const CelticCrossLayout: React.FC = () => (
     <CardPosition x="130" y="150" label="5" /> {/* Past */}
     <CardPosition x="230" y="150" label="6" /> {/* Future */}
 
-    {/* Staff/Rod */}
-    <CardPosition x="320" y="260" label="7" /> {/* You/Yourself */}
-    <CardPosition x="320" y="210" label="8" /> {/* External Influence */}
-    <CardPosition x="320" y="160" label="9" /> {/* Hopes/Fears */}
-    <CardPosition x="320" y="110" label="10" /> {/* Outcome */}
-    <CardPosition x="320" y="60" label="11" /> {/* Outcome */}
-    <CardPosition x="320" y="10" label="12" /> {/* Outcome */}
+    {/* Staff/Rod - Adjusted x coordinates for more right padding */}
+    <CardPosition x="370" y="260" label="7" /> {/* You/Yourself */}
+    <CardPosition x="370" y="210" label="8" /> {/* External Influence */}
+    <CardPosition x="370" y="160" label="9" /> {/* Hopes/Fears */}
+    <CardPosition x="370" y="110" label="10" /> {/* Outcome */}
+    <CardPosition x="370" y="60" label="11" /> {/* Outcome */}
+    <CardPosition x="370" y="10" label="12" /> {/* Outcome */}
   </svg>
 );
 
@@ -311,60 +474,284 @@ const ThreeCardLayout: React.FC = () => (
   </svg>
 );
 
-// Generic Placeholder for other spreads (now using simple text, not images)
-const GenericSpreadLayout: React.FC<{ spreadName: string }> = ({ spreadName }) => (
-  <div className="w-full h-auto max-h-96 mx-auto mb-8 flex items-center justify-center border border-purple-700 rounded-lg bg-purple-900 shadow-inner p-8 text-purple-400 text-center text-lg">
-    <p>Layout graphic for "{spreadName}" coming soon!</p>
-  </div>
+// NEW: Star Spread Layout (6 cards)
+const StarSpreadLayout: React.FC = () => (
+  <svg viewBox="0 0 400 300" className="w-full h-auto max-h-96 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
+    {/* Center */}
+    <CardPosition x="200" y="150" label="1" />
+    {/* Points of the star */}
+    <CardPosition x="200" y="50" label="2" /> {/* Top */}
+    <CardPosition x="300" y="100" label="3" rotation={30} /> {/* Top Right */}
+    <CardPosition x="300" y="200" label="4" rotation={-30} /> {/* Bottom Right */}
+    <CardPosition x="200" y="250" label="5" /> {/* Bottom */}
+    <CardPosition x="100" y="200" label="6" rotation={30} /> {/* Bottom Left */}
+    {/* Optional: if 7th card is needed, could be at 100,100 rotation -30 */}
+  </svg>
+);
+
+// NEW: Heart and Head Spread Layout (4 cards)
+const HeartAndHeadLayout: React.FC = () => (
+  <svg viewBox="0 0 300 250" className="w-full h-auto max-h-96 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
+    <CardPosition x="150" y="50" label="1" /> {/* Your Spiritual Self */}
+    <CardPosition x="220" y="125" label="2" /> {/* What You Think */}
+    <CardPosition x="80" y="125" label="3" /> {/* What You Feel */}
+    <CardPosition x="150" y="200" label="4" /> {/* The Heart of the Matter */}
+  </svg>
+);
+
+// NEW: Past Present & Future Spread Layout (3 cards - distinct from ThreeCardLayout)
+const PastPresentFutureLayout: React.FC = () => (
+  <svg viewBox="0 0 350 150" className="w-full h-auto max-h-64 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
+    <CardPosition x="70" y="75" label="1" /> {/* Past */}
+    <CardPosition x="175" y="75" label="2" /> {/* Present */}
+    <CardPosition x="280" y="75" label="3" /> {/* Future */}
+  </svg>
+);
+
+// NEW: Tree of Life Spread Layout (10 cards - simplified)
+const TreeOfLifeLayout: React.FC = () => (
+  // Increased viewBox height from 450 to 550, adjusted y coordinates for lower cards
+  <svg viewBox="0 0 300 550" className="w-full h-auto max-h-96 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
+    {/* Kether */}
+    <CardPosition x="150" y="30" label="1" />
+    {/* Chokmah & Binah */}
+    <CardPosition x="80" y="120" label="2" />
+    <CardPosition x="220" y="120" label="3" />
+    {/* Chesed & Geburah */}
+    <CardPosition x="80" y="210" label="4" />
+    <CardPosition x="220" y="210" label="5" />
+    {/* Tiphareth */}
+    <CardPosition x="150" y="300" label="6" />
+    {/* Netzach & Hod */}
+    <CardPosition x="80" y="390" label="7" />
+    <CardPosition x="220" y="390" label="8" />
+    {/* Yesod & Malkuth - Adjusted Y coordinates */}
+    <CardPosition x="150" y="450" label="9" />
+    <CardPosition x="150" y="510" label="10" />
+  </svg>
+);
+
+// NEW: Horseshoe Spread Layout (7 cards)
+const HorseshoeLayout: React.FC = () => (
+  <svg viewBox="0 0 400 250" className="w-full h-auto max-h-96 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
+    <CardPosition x="50" y="125" label="1" rotation={-15} />
+    <CardPosition x="100" y="70" label="2" rotation={-5} />
+    <CardPosition x="175" y="50" label="3" />
+    <CardPosition x="250" y="70" label="4" rotation={5} />
+    <CardPosition x="300" y="125" label="5" rotation={15} />
+    <CardPosition x="350" y="170" label="6" rotation={25} />
+    <CardPosition x="200" y="200" label="7" /> {/* Center bottom */}
+  </svg>
+);
+
+// NEW: Year Ahead Spread Layout (12 cards - circular)
+const YearAheadLayout: React.FC = () => {
+  const center = { x: 200, y: 200 };
+  const radius = 120;
+  const positions = Array.from({ length: 12 }, (_, i) => {
+    const angle = (i * (360 / 12) - 90) * (Math.PI / 180); // -90 to start at 12 o'clock
+    const x = center.x + radius * Math.cos(angle);
+    const y = center.y + radius * Math.sin(angle);
+    return { x, y, label: `${i + 1}` };
+  });
+
+  return (
+    <svg viewBox="0 0 400 400" className="w-full h-auto max-h-96 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
+      {positions.map((pos, index) => (
+        <CardPosition key={index} x={pos.x} y={pos.y} label={pos.label} />
+      ))}
+    </svg>
+  );
+};
+
+// NEW: Month Ahead Spread Layout (4 cards - linear)
+const MonthAheadLayout: React.FC = () => (
+  <svg viewBox="0 0 400 150" className="w-full h-auto max-h-64 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
+    <CardPosition x="50" y="75" label="1" />
+    <CardPosition x="150" y="75" label="2" />
+    <CardPosition x="250" y="75" label="3" />
+    <CardPosition x="350" y="75" label="4" />
+  </svg>
+);
+
+// NEW: Week Ahead Spread Layout (7 cards - linear)
+const WeekAheadLayout: React.FC = () => (
+  <svg viewBox="0 0 450 150" className="w-full h-auto max-h-64 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
+    <CardPosition x="40" y="75" label="1" />
+    <CardPosition x="100" y="75" label="2" />
+    <CardPosition x="160" y="75" label="3" />
+    <CardPosition x="220" y="75" label="4" />
+    <CardPosition x="280" y="75" label="5" />
+    <CardPosition x="340" y="75" label="6" />
+    <CardPosition x="400" y="75" label="7" />
+  </svg>
+);
+
+// NEW: Deck Interview Layout (6 cards)
+const DeckInterviewLayout: React.FC = () => (
+  <svg viewBox="0 0 400 300" className="w-full h-auto max-h-96 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
+    <CardPosition x="100" y="75" label="1" />
+    <CardPosition x="200" y="75" label="2" />
+    <CardPosition x="300" y="75" label="3" />
+    <CardPosition x="100" y="225" label="4" />
+    <CardPosition x="200" y="225" label="5" />
+    <CardPosition x="300" y="225" label="6" />
+  </svg>
+);
+
+// NEW: Deck Bonding Layout (4 cards)
+const DeckBondingLayout: React.FC = () => (
+  <svg viewBox="0 0 350 250" className="w-full h-auto max-h-96 mx-auto mb-8 border border-purple-700 rounded-lg bg-purple-900 shadow-inner">
+    <CardPosition x="175" y="50" label="1" /> {/* Top */}
+    <CardPosition x="175" y="200" label="2" /> {/* Bottom */}
+    <CardPosition x="75" y="125" label="3" /> {/* Left */}
+    <CardPosition x="275" y="125" label="4" /> {/* Right */}
+  </svg>
 );
 
 
-function App() {
-  const [showHomeScreen, setShowHomeScreen] = useState(true); // New state for home screen
-  const [selectedMenuItem, setSelectedMenuItem] = useState('celticCross'); // Default to Celtic Cross after home screen
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu toggle
+// --- New: Spread Definition Interfaces ---
+interface SpreadPosition {
+  id: number;
+  name: string;
+}
 
-  // State to store selected cards for Celtic Cross spread
-  const [celticCrossSelections, setCelticCrossSelections] = useState(
+interface SpreadSelectionItem {
+  id: number;
+  name: string; // Position name
+  cardId: string; // Selected card ID
+  orientation: 'upright' | 'reversed';
+}
+
+interface SpreadDefinition {
+  name: string;
+  positions: SpreadPosition[];
+  layoutComponent: React.FC; // Now always a specific React.FC, no longer generic
+  description: string;
+}
+
+// --- New: Central Spread Definitions Object ---
+const spreadDefinitions: { [key: string]: SpreadDefinition } = {
+  celticCross: {
+    name: 'Celtic Cross & Staff Spread',
+    positions: celticCrossPositions,
+    layoutComponent: CelticCrossLayout,
+    description: 'Select a card and its orientation for each of the 12 positions.',
+  },
+  threeCard: {
+    name: 'Three Card Spread',
+    positions: threeCardPositions,
+    layoutComponent: ThreeCardLayout,
+    description: 'Select three cards for a quick reading (e.g., Past, Present, Future).',
+  },
+  starSpread: {
+    name: 'Star Spread',
+    positions: starSpreadPositions,
+    layoutComponent: StarSpreadLayout,
+    description: 'A spread to gain insight into your hopes, fears, strengths, and weaknesses.',
+  },
+  heartAndHead: {
+    name: 'Heart and Head Spread',
+    positions: heartAndHeadPositions,
+    layoutComponent: HeartAndHeadLayout,
+    description: 'This spread reveals the spiritual, intellectual, and emotional aspects of your life.',
+  },
+  pastPresentFuture: {
+    name: 'Past Present & Future Spread',
+    positions: pastPresentFuturePositions,
+    layoutComponent: PastPresentFutureLayout,
+    description: 'A classic spread for understanding your journey from past to future.',
+  },
+  treeOfLife: {
+    name: 'Tree of Life Spread',
+    positions: treeOfLifePositions,
+    layoutComponent: TreeOfLifeLayout,
+    description: 'Explore the different aspects of your life through the Tree of Life Qabalistic system.',
+  },
+  horseshoe: {
+    name: 'Horseshoe Spread',
+    positions: horseshoePositions,
+    layoutComponent: HorseshoeLayout,
+    description: 'A comprehensive spread for examining influences, obstacles, and potential outcomes.',
+  },
+  yearAhead: {
+    name: 'Year Ahead Spread',
+    positions: yearAheadPositions,
+    layoutComponent: YearAheadLayout,
+    description: 'Gain insight into the themes and energies of each month in the coming year.',
+  },
+  monthAhead: {
+    name: 'Month Ahead Spread',
+    positions: monthAheadPositions,
+    layoutComponent: MonthAheadLayout,
+    description: 'A weekly breakdown of energies and insights for the upcoming month.',
+  },
+  weekAhead: {
+    name: 'Week Ahead Spread',
+    positions: weekAheadPositions,
+    layoutComponent: WeekAheadLayout,
+    description: 'A daily guide to the energies and events of the upcoming week.',
+  },
+  // NEW: Deck Interview Spread Definition
+  deckInterview: {
+    name: 'Deck Interview Spread',
+    positions: deckInterviewPositions,
+    layoutComponent: DeckInterviewLayout,
+    description: 'A spread to help you get to know a new or existing tarot deck.',
+  },
+  // NEW: Deck Bonding Spread Definition
+  deckBonding: {
+    name: 'Deck Bonding Spread',
+    positions: deckBondingPositions,
+    layoutComponent: DeckBondingLayout,
+    description: 'A spread to deepen your connection and bond with your tarot deck.',
+  },
+  // 'cardMeanings' is handled separately, not a spread
+};
+
+
+function App() {
+  const [showHomeScreen, setShowHomeScreen] = useState(true);
+  const [selectedMenuItem, setSelectedMenuItem] = useState('celticCross'); // Default to Celtic Cross
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // --- New State for Dynamic Spreads ---
+  const [currentSpreadType, setCurrentSpreadType] = useState<string>('celticCross');
+  const [currentSpreadPositions, setCurrentSpreadPositions] = useState<SpreadPosition[]>(celticCrossPositions);
+  const [currentSpreadSelections, setCurrentSpreadSelections] = useState<SpreadSelectionItem[]>(
     celticCrossPositions.map(pos => ({ ...pos, cardId: '', orientation: 'upright' }))
   );
-  // State for the card selected in the Card Selection Tool tab
+  // --- End New State ---
+
   const [selectedCardForMeaning, setSelectedCardForMeaning] = useState('');
-  // State to store the dynamically fetched meaning for Card Meanings
   const [cardMeaningText, setCardMeaningText] = useState('Select a card to see its meaning.');
-  // State to track loading status of Card Meanings
   const [isLoadingCardMeaning, setIsLoadingCardMeaning] = useState(false);
 
-  // State to store the generated reading message (summary of cards)
   const [readMessage, setReadMessage] = useState('');
-  // State to store the LLM generated interpretation for Spreads
   const [llmInterpretation, setLlmInterpretation] = useState('');
-  // State to track loading status of LLM interpretation for Spreads
   const [isLoadingInterpretation, setIsLoadingInterpretation] = useState(false);
 
-  // **** IMPORTANT: REPLACE THIS WITH YOUR AWS API GATEWAY INVOKE URL ****
-  // Example: 'https://abcdef123.execute-api.us-east-1.amazonaws.com/prod'
-  const apiUrl = 'https://cpif4zh0bf.execute-api.eu-north-1.amazonaws.com/prod'; // <<< PASTE YOUR URL HERE
+  const apiUrl = 'https://cpif4zh0bf.execute-api.eu-north-1.amazonaws.com/prod';
 
-  // Handle card selection for a specific position in Celtic Cross
-  const handleCardSelect = useCallback((positionId: string, cardId: string) => {
-    setCelticCrossSelections(prevSelections =>
+  // --- Refactored handleCardSelect to be generic ---
+  const handleCardSelect = useCallback((positionId: number, cardId: string) => {
+    setCurrentSpreadSelections(prevSelections =>
       prevSelections.map(selection =>
         selection.id === positionId ? { ...selection, cardId: cardId } : selection
       )
     );
-    setReadMessage(''); // Clear messages on new selection
+    setReadMessage('');
     setLlmInterpretation('');
   }, []);
 
-  // Handle orientation selection for a specific position in Celtic Cross
-  const handleOrientationSelect = useCallback((positionId: string, orientation: 'upright' | 'reversed') => {
-    setCelticCrossSelections(prevSelections =>
+  // --- Refactored handleOrientationSelect to be generic ---
+  const handleOrientationSelect = useCallback((positionId: number, orientation: 'upright' | 'reversed') => {
+    setCurrentSpreadSelections(prevSelections =>
       prevSelections.map(selection =>
         selection.id === positionId ? { ...selection, orientation: orientation } : selection
       )
     );
-    setReadMessage(''); // Clear messages on new orientation
+    setReadMessage('');
     setLlmInterpretation('');
   }, []);
 
@@ -381,16 +768,13 @@ function App() {
     const prompt = `Provide concise keyword descriptions for the Tarot card "${cardName}". Structure your answer clearly with "**Upright:**" followed by comma-separated keywords, then a blank line (double newline), and then "**Reversed:**" followed by comma-separated keywords.`;
 
     try {
-      // Calling YOUR AWS API Gateway endpoint, which triggers your Lambda function
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // Send the prompt as a simple JSON object, as expected by your Lambda
         body: JSON.stringify({ prompt: prompt })
       });
 
       const result = await response.json();
-      // Your Lambda function returns a JSON object like { "interpretation": "AI generated text" }
       if (result && result.interpretation) {
         setCardMeaningText(result.interpretation);
       } else {
@@ -403,7 +787,7 @@ function App() {
     } finally {
       setIsLoadingCardMeaning(false);
     }
-  }, [apiUrl]); // Dependency on apiUrl
+  }, [apiUrl]);
 
   // Effect to call fetchCardMeaning when selectedCardForMeaning changes and Card Meanings is active
   useEffect(() => {
@@ -414,9 +798,12 @@ function App() {
   }, [selectedCardForMeaning, selectedMenuItem, fetchCardMeaning]);
 
 
-  // Generate the reading message based on selected cards for Spreads via AWS Lambda proxy
-  const generateRead = useCallback(async (spreadType: string, spreadPositions: {id: string; name: string}[], selections: typeof celticCrossSelections) => {
-    const selectedCardsDetails = selections
+  // --- Refactored generateRead to be generic ---
+  const generateRead = useCallback(async () => {
+    const spreadDef = spreadDefinitions[currentSpreadType];
+    if (!spreadDef) return; // Should not happen
+
+    const selectedCardsDetails = currentSpreadSelections
       .filter(selection => selection.cardId)
       .map(selection => {
         const card = allTarotCards.find(c => c.id === selection.cardId);
@@ -424,30 +811,26 @@ function App() {
         return `${selection.name}: ${card?.name} (${orientationText})`;
       });
 
-    if (selectedCardsDetails.length < spreadPositions.length) {
-      setReadMessage(`Please select all ${spreadPositions.length} cards for a full reading.`);
+    if (selectedCardsDetails.length < spreadDef.positions.length) {
+      setReadMessage(`Please select all ${spreadDef.positions.length} cards for a full reading.`);
       setLlmInterpretation('');
       return;
     }
 
-    setReadMessage(`Your ${spreadType} Reading Summary:\n\n${selectedCardsDetails.join('\n')}`);
+    setReadMessage(`Your ${spreadDef.name} Reading Summary:\n\n${selectedCardsDetails.join('\n')}`);
     setLlmInterpretation('Generating interpretation...');
     setIsLoadingInterpretation(true);
 
-    // Construct the prompt for the LLM for overall spread interpretation
-    const prompt = `Provide a detailed Tarot reading interpretation based on the following ${spreadType} spread. Each line specifies the position, the card drawn, and its orientation (Upright/Reversed). Focus on how these cards interact and what overall message they convey. The positions are:\n${spreadPositions.map(p => p.name).join(', ')}.\n\nHere are the selected cards:\n${selectedCardsDetails.join('\n')}\n\nWhat is the overall interpretation of this spread?`;
+    const prompt = `Provide a detailed Tarot reading interpretation based on the following ${spreadDef.name} spread. Each line specifies the position, the card drawn, and its orientation (Upright/Reversed). Focus on how these cards interact and what overall message they convey. The positions are:\n${spreadDef.positions.map(p => p.name).join(', ')}.\n\nHere are the selected cards:\n${selectedCardsDetails.join('\n')}\n\nWhat is the overall interpretation of this spread?`;
 
     try {
-      // Calling YOUR AWS API Gateway endpoint, which triggers your Lambda function
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // Send the prompt as a simple JSON object, as expected by your Lambda
         body: JSON.stringify({ prompt: prompt })
       });
 
       const result = await response.json();
-      // Your Lambda function returns a JSON object like { "interpretation": "AI generated text" }
       if (result && result.interpretation) {
         setLlmInterpretation(result.interpretation);
       } else {
@@ -460,29 +843,54 @@ function App() {
     } finally {
       setIsLoadingInterpretation(false);
     }
-  }, [celticCrossSelections, apiUrl]); // Dependencies on selections and apiUrl
+  }, [currentSpreadType, currentSpreadSelections, apiUrl]);
 
-  // Clear all selections in Celtic Cross
-  const clearCelticCrossSelection = useCallback(() => {
-    setCelticCrossSelections(
-      celticCrossPositions.map(pos => ({ ...pos, cardId: '', orientation: 'upright' }))
-    );
+  // --- Refactored clearSelection to be generic ---
+  const clearCurrentSpreadSelection = useCallback(() => {
+    const spreadDef = spreadDefinitions[currentSpreadType];
+    if (spreadDef) {
+      setCurrentSpreadSelections(
+        spreadDef.positions.map(pos => ({ ...pos, cardId: '', orientation: 'upright' }))
+      );
+    }
     setReadMessage('');
     setLlmInterpretation('');
-  }, []);
+  }, [currentSpreadType]);
 
-  // Handles changing menu items
-  const handleMenuItemSelect = useCallback((itemId: string) => {
-    setSelectedMenuItem(itemId);
-    // Reset states when switching sections if needed
-    if (itemId === 'cardMeanings') {
+
+  // --- Updated handleMenuItemSelect to manage dynamic spread state ---
+  useEffect(() => {
+    // This useEffect ensures that when selectedMenuItem changes,
+    // the current spread states are correctly initialized.
+    // It also acts as the primary trigger for spread changes.
+    if (spreadDefinitions[selectedMenuItem]) {
+      const initialSpreadDef = spreadDefinitions[selectedMenuItem];
+      setCurrentSpreadType(selectedMenuItem);
+      setCurrentSpreadPositions(initialSpreadDef.positions);
+      setCurrentSpreadSelections(
+        initialSpreadDef.positions.map(pos => ({ ...pos, cardId: '', orientation: 'upright' }))
+      );
+      setReadMessage(''); // Clear messages on new spread selection
+      setLlmInterpretation('');
+    } else if (selectedMenuItem === 'cardMeanings') {
       setSelectedCardForMeaning('');
       setCardMeaningText('Select a card to see its meaning.');
+      setCurrentSpreadType(''); // Clear current spread type
+      setCurrentSpreadPositions([]);
+      setCurrentSpreadSelections([]);
     } else {
-      // Reset spread specific states when moving away from a spread
+      // For other non-spread categories, clear spread-related states
+      setCurrentSpreadType('');
+      setCurrentSpreadPositions([]);
+      setCurrentSpreadSelections([]);
       setReadMessage('');
       setLlmInterpretation('');
     }
+  }, [selectedMenuItem]); // Dependency on selectedMenuItem
+
+  const handleMenuItemSelect = useCallback((itemId: string) => {
+    setSelectedMenuItem(itemId);
+    // The useEffect above will handle state updates based on selectedMenuItem
   }, []);
 
   const toggleMenu = useCallback(() => {
@@ -490,233 +898,168 @@ function App() {
   }, []);
 
 
-  // --- Render Content Based on Selected Menu Item ---
+  // --- Refactored Render Content Based on Selected Menu Item ---
   const renderContent = () => {
-    // Helper to find parent category name for display in placeholders
-    const getParentCategoryName = (itemId: string) => {
-      for (const category of menuItems) {
-        if (category.subItems) {
-          if (category.subItems.some(sub => sub.id === itemId)) {
-            return category.name;
-          }
-        } else if (category.id === itemId) {
-          return category.name; // For top-level items without sub-items
-        }
-      }
-      return ''; // Fallback
-    };
-
     const currentItemName = menuItems.find(m => m.id === selectedMenuItem)?.name ||
                             menuItems.find(m => m.subItems?.some(s => s.id === selectedMenuItem))?.subItems?.find(s => s.id === selectedMenuItem)?.name ||
-                            '';
+                            menuItems.find(m => m.subItems?.some(s => s.subItems?.some(ss => ss.id === selectedMenuItem)))?.subItems?.find(s => s.subItems?.some(ss => ss.id === selectedMenuItem))?.subItems?.find(ss => ss.id === selectedMenuItem)?.name ||
+                            ''; // Added logic to find name for sub-sub-items
 
 
-    switch (selectedMenuItem) {
-      case 'celticCross':
-        return (
-          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
-            <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Celtic Cross & Staff Spread</h2>
-            <p className="text-md text-purple-300 mb-6 text-center">
-              Select a card and its orientation for each of the 12 positions.
-            </p>
+    // Render Spread UI if currentSpreadType is set
+    if (currentSpreadType && spreadDefinitions[currentSpreadType]) {
+      const spreadDef = spreadDefinitions[currentSpreadType];
+      const LayoutComponent = spreadDef.layoutComponent;
 
-            <CelticCrossLayout />
+      return (
+        <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
+          <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">{spreadDef.name}</h2>
+          <p className="text-md text-purple-300 mb-6 text-center">
+            {spreadDef.description}
+          </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-              {celticCrossSelections.map(position => (
-                <div key={position.id} className="bg-purple-900 p-4 rounded-lg shadow-md border border-purple-700">
-                  <h3 className="text-lg font-medium text-purple-100 mb-2">{position.name}</h3>
-                  {/* Card Selection Dropdown */}
-                  <select
-                    className="w-full p-2 mb-3 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    value={position.cardId}
-                    onChange={(e) => handleCardSelect(position.id, e.target.value)}
-                  >
-                    <option value="">Select Card</option>
-                    {allTarotCards.map(card => (
-                      // Only show cards that are not yet selected, OR the card currently selected for this position
-                      <option
-                        key={card.id}
-                        value={card.id}
-                        disabled={celticCrossSelections.some(sel => sel.cardId === card.id && sel.id !== position.id)}
-                      >
-                        {card.name}
-                      </option>
-                    ))}
-                  </select>
+          {/* Render the specific layout component for the spread */}
+          {LayoutComponent && (
+            <LayoutComponent />
+          )}
 
-                  {/* Orientation Selection */}
-                  {position.cardId && (
-                    <div className="flex justify-around items-center text-purple-200">
-                      <label className="inline-flex items-center">
-                        <input
-                          type="radio"
-                          name={`orientation-${position.id}`}
-                          value="upright"
-                          checked={position.orientation === 'upright'}
-                          onChange={() => handleOrientationSelect(position.id, 'upright')}
-                          className="form-radio text-purple-500 h-4 w-4"
-                        />
-                        <span className="ml-2">Upright</span>
-                      </label>
-                      <label className="inline-flex items-center">
-                        <input
-                          type="radio"
-                          name={`orientation-${position.id}`}
-                          value="reversed"
-                          checked={position.orientation === 'reversed'}
-                          onChange={() => handleOrientationSelect(position.id, 'reversed')}
-                          className="form-radio text-purple-500 h-4 w-4"
-                        />
-                        <span className="ml-2">Reversed</span>
-                      </label>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
+            {currentSpreadSelections.map((position: SpreadSelectionItem) => (
+              <div key={position.id} className="bg-purple-900 p-4 rounded-lg shadow-md border border-purple-700">
+                <h3 className="text-lg font-medium text-purple-100 mb-2">{position.name}</h3>
+                {/* Card Selection Dropdown */}
+                <select
+                  className="w-full p-2 mb-3 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  value={position.cardId as any}
+                  onChange={(e) => handleCardSelect(position.id, e.target.value)}
+                >
+                  <option value="">Select Card</option>
+                  {allTarotCards.map(card => (
+                    <option
+                      key={card.id}
+                      value={card.id}
+                      // Disable already selected cards in other positions
+                      disabled={currentSpreadSelections.some(sel => sel.cardId === card.id && sel.id !== position.id)}
+                    >
+                      {card.name}
+                    </option>
+                  ))}
+                </select>
 
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
-              <button
-                className="px-8 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
-                onClick={() => generateRead('Celtic Cross', celticCrossPositions, celticCrossSelections)}
-                disabled={isLoadingInterpretation} // Disable button while loading
-              >
-                {isLoadingInterpretation ? 'Generating...' : 'Generate Read'}
-              </button>
-              <button
-                className="px-8 py-3 bg-gray-700 text-white font-bold rounded-lg shadow-lg hover:bg-gray-800 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
-                onClick={clearCelticCrossSelection}
-                disabled={isLoadingInterpretation} // Disable button while loading
-              >
-                Clear Selection
-              </button>
-            </div>
-
-            {/* Reading Summary Display */}
-            {readMessage && (
-              <div className="bg-purple-800 p-6 rounded-lg shadow-inner text-purple-100 whitespace-pre-wrap mt-6">
-                <h3 className="text-xl font-semibold mb-3 text-center">Your Reading Summary:</h3>
-                <p className="text-lg">{readMessage}</p>
-              </div>
-            )}
-
-            {/* LLM Interpretation Display */}
-            {llmInterpretation && (
-              <div className="bg-purple-800 p-6 rounded-lg shadow-inner text-purple-100 whitespace-pre-wrap mt-6">
-                <h3 className="text-xl font-semibold mb-3 text-center">AI Interpretation:</h3>
-                <p className="text-lg">
-                  {isLoadingInterpretation ? 'Please wait, generating a comprehensive interpretation...' : llmInterpretation}
-                </p>
-              </div>
-            )}
-          </div>
-        );
-
-      case 'cardMeanings':
-        return (
-          <div className="w-full max-w-2xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
-            <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Card Meaning Tool</h2>
-            <p className="text-md text-purple-300 mb-6 text-center">
-              Select any tarot card to see its brief upright and reversed keyword meanings.
-            </p>
-
-            <div className="mb-8">
-              <label htmlFor="card-meaning-select" className="block text-lg font-medium text-purple-200 mb-2">
-                Select a Card:
-              </label>
-              <select
-                id="card-meaning-select"
-                className="w-full p-3 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
-                value={selectedCardForMeaning}
-                onChange={(e) => setSelectedCardForMeaning(e.target.value)}
-                disabled={isLoadingCardMeaning} // Disable while loading
-              >
-                <option value="">-- Choose a Card --</option>
-                {allTarotCards.map(card => (
-                  <option key={card.id} value={card.id}>
-                    {card.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Display Card Meaning */}
-            <div className="bg-purple-800 p-6 rounded-lg shadow-inner text-purple-100">
-              <h3 className="text-xl font-semibold mb-3 text-center">Meaning:</h3>
-              <p className="text-lg">
-                {isLoadingCardMeaning ? 'Generating meaning...' : (
-                  <span dangerouslySetInnerHTML={{ __html: cardMeaningText.replace(/\n/g, '<br />') }} />
+                {/* Orientation Selection */}
+                {position.cardId && (
+                  <div className="flex justify-around items-center text-purple-200">
+                    <label className="inline-flex items-center">
+                      <input
+                        type="radio"
+                        name={`orientation-${position.id}`}
+                        value="upright"
+                        checked={position.orientation === 'upright'}
+                        onChange={() => handleOrientationSelect(position.id, 'upright')}
+                        className="form-radio text-purple-500 h-4 w-4"
+                      />
+                      <span className="ml-2">Upright</span>
+                    </label>
+                    <label className="inline-flex items-center">
+                      <input
+                        type="radio"
+                        name={`orientation-${position.id}`}
+                        value="reversed"
+                        checked={position.orientation === 'reversed'}
+                        onChange={() => handleOrientationSelect(position.id, 'reversed')}
+                        className="form-radio text-purple-500 h-4 w-4"
+                      />
+                      <span className="ml-2">Reversed</span>
+                    </label>
+                  </div>
                 )}
+              </div>
+            ))}
+          </div>
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+            <button
+              className="px-8 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+              onClick={generateRead}
+              disabled={isLoadingInterpretation}
+            >
+              {isLoadingInterpretation ? 'Generating...' : 'Generate Read'}
+            </button>
+            <button
+              className="px-8 py-3 bg-gray-700 text-white font-bold rounded-lg shadow-lg hover:bg-gray-800 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+              onClick={clearCurrentSpreadSelection}
+              disabled={isLoadingInterpretation}
+            >
+              Clear Selection
+            </button>
+          </div>
+
+          {/* Reading Summary Display */}
+          {readMessage && (
+            <div className="bg-purple-800 p-6 rounded-lg shadow-inner text-purple-100 whitespace-pre-wrap mt-6">
+              <h3 className="text-xl font-semibold mb-3 text-center">Your Reading Summary:</h3>
+              <p className="text-lg">{readMessage}</p>
+            </div>
+          )}
+
+          {/* LLM Interpretation Display */}
+          {llmInterpretation && (
+            <div className="bg-purple-800 p-6 rounded-lg shadow-inner text-purple-100 whitespace-pre-wrap mt-6">
+              <h3 className="text-xl font-semibold mb-3 text-center">AI Interpretation:</h3>
+              <p className="text-lg">
+                {isLoadingInterpretation ? 'Please wait, generating a comprehensive interpretation...' : llmInterpretation}
               </p>
             </div>
-          </div>
-        );
+          )}
+        </div>
+      );
+    }
 
-      // --- Spread Layouts and Placeholders (using SVGs or text) ---
-      case 'threeCard':
-        return (
-          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
-            <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Three Card Spread</h2>
-            <p className="text-md text-purple-300 mb-6 text-center">
-              Select three cards for a quick reading (e.g., Past, Present, Future).
-            </p>
-            <ThreeCardLayout />
-            <div className="text-center text-lg text-purple-400">
-              <p>Card selection and interpretation functionality to be added for this spread.</p>
-            </div>
-          </div>
-        );
-      case 'heartAndHead':
-        return (
-          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
-            <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Heart and Head Spread</h2>
-            <p className="text-md text-purple-300 mb-6 text-center">
-              This spread reveals the spiritual, intellectual, and emotional aspects of your life.
-            </p>
-            <GenericSpreadLayout spreadName="Heart and Head" />
-            <div className="text-center text-lg text-purple-400">
-              <p>Card selection and interpretation functionality to be added for this spread.</p>
-            </div>
-          </div>
-        );
-      case 'starSpread':
-      case 'pastPresentFuture':
-      case 'treeOfLife':
-      case 'horseshoe':
-      case 'yearAhead':
-      case 'monthAhead':
-      case 'weekAhead':
-        return (
-          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800 text-center">
-            <h2 className="text-3xl font-semibold mb-4 text-purple-200">{currentItemName} Spread</h2>
-            <GenericSpreadLayout spreadName={currentItemName} />
-            <p className="text-lg text-purple-300">
-              This is a placeholder for the **{currentItemName}** spread.
-              <br />
-              Functionality to be implemented soon!
-            </p>
-          </div>
-        );
+    // Handle 'cardMeanings' separately as it's not a spread
+    if (selectedMenuItem === 'cardMeanings') {
+      return (
+        <div className="w-full max-w-2xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
+          <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Card Meaning Tool</h2>
+          <p className="text-md text-purple-300 mb-6 text-center">
+            Select any tarot card to see its brief upright and reversed keyword meanings.
+          </p>
 
-      case 'earth':
-      case 'wind':
-      case 'fire':
-      case 'water':
-      case 'soul':
-        return (
-          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800 text-center">
-            <h2 className="text-3xl font-semibold mb-4 text-purple-200">{currentItemName} Element</h2>
-            <p className="text-lg text-purple-300">
-              This is a placeholder for information about the **{currentItemName}** element.
-              <br />
-              Content to be added here.
+          <div className="mb-8">
+            <label htmlFor="card-meaning-select" className="block text-lg font-medium text-purple-200 mb-2">
+              Select a Card:
+            </label>
+            <select
+              id="card-meaning-select"
+              className="w-full p-3 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
+              value={selectedCardForMeaning}
+              onChange={(e) => setSelectedCardForMeaning(e.target.value)}
+              disabled={isLoadingCardMeaning}
+            >
+              <option value="">-- Choose a Card --</option>
+              {allTarotCards.map(card => (
+                <option key={card.id} value={card.id}>
+                  {card.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Display Card Meaning */}
+          <div className="bg-purple-800 p-6 rounded-lg shadow-inner text-purple-100">
+            <h3 className="text-xl font-semibold mb-3 text-center">Meaning:</h3>
+            <p className="text-lg">
+              {isLoadingCardMeaning ? 'Generating meaning...' : (
+                <span dangerouslySetInnerHTML={{ __html: cardMeaningText.replace(/\n/g, '<br />') }} />
+              )}
             </p>
           </div>
-        );
+        </div>
+      );
+    }
 
-      // --- Zodiac Signs Content (no change) ---
+    // Handle other non-spread categories (Elements, Zodiac, Runes, etc.)
+    switch (selectedMenuItem) {
       case 'aries':
       case 'taurus':
       case 'gemini':
@@ -731,19 +1074,18 @@ function App() {
       case 'pisces':
         const zodiacSign = zodiacSignsData.find(sign => sign.id === selectedMenuItem);
         if (!zodiacSign) {
-          return null; // Should not happen if menuItems and zodiacSignsData are in sync
+          return null;
         }
         return (
           <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800 text-center">
             <h2 className="text-3xl font-semibold mb-4 text-purple-200">{zodiacSign.name}</h2>
-            <p className="text-6xl mb-4">{zodiacSign.symbol}</p> {/* Display symbol */}
+            <p className="text-6xl mb-4">{zodiacSign.symbol}</p>
             <p className="text-lg text-purple-300 leading-relaxed">
               {zodiacSign.description}
             </p>
           </div>
         );
 
-      // --- New: Witches Runes Content ---
       case 'witchesRunes':
         return (
           <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
@@ -755,7 +1097,7 @@ function App() {
               {witchesRunesData.map(rune => (
                 <div key={rune.id} className="bg-purple-800 p-4 rounded-lg shadow-md border border-purple-700 text-center">
                   <h3 className="text-xl font-semibold text-purple-100 mb-2">{rune.name}</h3>
-                  <p className="text-5xl mb-3">{rune.symbol}</p> {/* Display rune symbol */}
+                  <p className="text-5xl mb-3">{rune.symbol}</p>
                   <p className="text-md text-purple-300 leading-relaxed">{rune.description}</p>
                 </div>
               ))}
@@ -763,25 +1105,60 @@ function App() {
           </div>
         );
 
-      // --- Other New Categories Placeholders ---
+      // NEW: Elder Futhark Runes Display
       case 'elderFuthark':
-      case 'youngerFuthark':
         return (
-          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800 text-center">
-            <h2 className="text-3xl font-semibold mb-4 text-purple-200">{currentItemName} Runes</h2>
-            <p className="text-lg text-purple-300">
-              This is a placeholder for information about **{currentItemName}** runes.
-              <br />
-              Content to be added here.
+          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
+            <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Elder Futhark Runes</h2>
+            <p className="text-md text-purple-300 mb-6 text-center">
+              Explore the meanings of the 24 runes of the Elder Futhark, the oldest form of the runic alphabet.
             </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {elderFutharkRunesData.map(rune => (
+                <div key={rune.id} className="bg-purple-800 p-4 rounded-lg shadow-md border border-purple-700 text-center">
+                  <h3 className="text-xl font-semibold text-purple-100 mb-2">{rune.name}</h3>
+                  <p className="text-5xl mb-3 font-['Segoe UI Historic']">{rune.symbol}</p>
+                  <p className="text-md text-purple-300 leading-relaxed">{rune.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         );
 
+      // NEW: Younger Futhark Runes Display
+      case 'youngerFuthark':
+        return (
+          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
+            <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Younger Futhark Runes</h2>
+            <p className="text-md text-purple-300 mb-6 text-center">
+              Explore the meanings of the 16 runes of the Younger Futhark, a later and more simplified runic alphabet.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {youngerFutharkRunesData.map(rune => (
+                <div key={rune.id} className="bg-purple-800 p-4 rounded-lg shadow-md border border-purple-700 text-center">
+                  <h3 className="text-xl font-semibold text-purple-100 mb-2">{rune.name}</h3>
+                  <p className="text-5xl mb-3 font-['Segoe UI Historic']">{rune.symbol}</p>
+                  <p className="text-md text-purple-300 leading-relaxed">{rune.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'earth':
+      case 'wind':
+      case 'fire':
+      case 'water':
+      case 'soul':
       case 'herbMagic':
       case 'incenseOils':
       case 'colourTheory':
       case 'crystals':
       case 'deities':
+      case 'north':
+      case 'east':
+      case 'south':
+      case 'west':
         return (
           <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800 text-center">
             <h2 className="text-3xl font-semibold mb-4 text-purple-200">{currentItemName}</h2>
@@ -793,23 +1170,7 @@ function App() {
           </div>
         );
 
-      case 'north':
-      case 'east':
-      case 'south':
-      case 'west':
-        return (
-          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800 text-center">
-            <h2 className="text-3xl font-semibold mb-4 text-purple-200">{currentItemName}</h2>
-            <p className="text-lg text-purple-300">
-              This is a placeholder for information about the **{currentItemName}** cardinal point.
-              <br />
-              Content to be added here.
-            </p>
-          </div>
-        );
-
       default:
-        // Default content when selectedMenuItem is not recognized (e.g., initial state)
         return (
           <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800 text-center">
             <h2 className="text-3xl font-semibold mb-4 text-purple-200">Welcome to Chicksands Tarot</h2>
@@ -828,7 +1189,9 @@ function App() {
       {showHomeScreen && (
         <div className="fixed inset-0 bg-black bg-opacity-95 flex flex-col items-center justify-center p-4 z-50">
           <h1 className="text-5xl sm:text-6xl font-bold mb-6 text-center text-white animate-pulse">Chicksands Tarot</h1>
-          <div className="bg-purple-900 p-8 rounded-xl shadow-2xl border border-purple-700 max-w-2xl text-center">
+          {/* Main content box: now with max-height and overflow-y-auto */}
+          <div className="bg-purple-900 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-700 max-w-2xl text-center
+                          max-h-[70vh] overflow-y-auto flex flex-col items-center justify-center">
             <h2 className="text-3xl font-semibold mb-4 text-purple-200">Embrace the Wisdom of Pagan Divination</h2>
             <p className="text-lg text-purple-300 mb-6 leading-relaxed">
               Welcome to Chicksands Tarot, your digital sanctuary for exploring the ancient art of divination. Rooted in the rich traditions of Paganism, this app offers a unique journey into self-discovery and spiritual insight.
@@ -837,13 +1200,14 @@ function App() {
               <br /><br />
               Here, you can delve into various tarot spreads, explore the significance of the elements, and understand the influence of the zodiac, all guided by intuitive AI interpretations.
             </p>
-            <button
-              className="px-10 py-4 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 text-xl"
-              onClick={() => setShowHomeScreen(false)}
-            >
-              Enter the Sanctuary
-            </button>
           </div>
+          {/* Button is now outside the scrollable content box, but still within the main flex container */}
+          <button
+            className="mt-6 px-10 py-4 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 text-xl"
+            onClick={() => setShowHomeScreen(false)}
+          >
+            Enter the Sanctuary
+          </button>
         </div>
       )}
 
@@ -859,19 +1223,19 @@ function App() {
             ☰ Menu
           </button>
 
-          {/* Menu Sidebar */}
-          <Menu
-            menuItems={menuItems}
-            selectedItem={selectedMenuItem}
-            onSelect={handleMenuItemSelect}
-            isMenuOpen={isMenuOpen}
-            onToggleMenu={toggleMenu}
-          />
-
           {/* Main Content Area */}
           <div className={`flex-1 p-4 sm:p-8 flex flex-col items-center transition-all duration-300 ease-in-out
-                          ${isMenuOpen ? 'sm:ml-64' : 'sm:ml-0'} `}> {/* Adjust margin for desktop menu */}
+                          ${isMenuOpen ? 'sm:ml-64' : 'sm:ml-0'} pt-20 sm:pt-8`}>
             <h1 className="text-4xl sm:text-5xl font-bold mb-8 text-center text-white">Chicksands Tarot</h1>
+
+            {/* Menu Sidebar - Still rendered here, fixed positioning handles its visual placement */}
+            <Menu
+              menuItems={menuItems}
+              selectedItem={selectedMenuItem}
+              onSelect={handleMenuItemSelect}
+              isMenuOpen={isMenuOpen}
+              onToggleMenu={toggleMenu}
+            />
 
             {renderContent()}
           </div>
