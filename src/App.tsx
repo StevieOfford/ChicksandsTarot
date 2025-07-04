@@ -18,7 +18,7 @@ const allTarotCards = [
   { id: 'justice', name: 'Justice' },
   { id: 'hanged-man', name: 'The Hanged Man' },
   { id: 'death', name: 'The Death' },
-  { id: 'temperance', name: 'Temperance' },
+  { id: 'temperance', 'name': 'Temperance' },
   { id: 'devil', name: 'The Devil' },
   { id: 'tower', name: 'The Tower' },
   { id: 'star', name: 'The Star' },
@@ -58,8 +58,20 @@ const celticCrossPositions = [
   { id: 12, name: '12. Outcome 3' },
 ];
 
-// Removed unused threeCardPositions and heartAndHeadPositions for now to clear TS6133 warnings.
-// They can be re-added when their functionality is implemented.
+// New: Positions for Three Card Spread (currently unused in renderContent, but part of planned structure)
+const threeCardPositions = [
+  { id: 1, name: '1. Past' },
+  { id: 2, name: '2. Present' },
+  { id: 3, name: '3. Future' },
+];
+
+// New: Positions for Heart and Head Spread (currently unused in renderContent, but part of planned structure)
+const heartAndHeadPositions = [
+  { id: 1, name: '1. Your Spiritual Self' },
+  { id: 2, name: '2. What You Think' },
+  { id: 3, name: '3. What You Feel' },
+  { id: 4, name: '4. The Heart of the Matter' },
+];
 
 
 // --- Updated: Menu Structure Data ---
@@ -137,7 +149,7 @@ const menuItems = [
   },
 ];
 
-// --- Zodiac Signs Data (no change) ---
+// --- Zodiac Signs Data (FIXED: Removed extraneous 'федерации.') ---
 const zodiacSignsData = [
   { id: 'aries', name: 'Aries', symbol: '♈', description: 'Aries, the first sign of the zodiac, is known for its pioneering spirit, courage, and enthusiasm. Ruled by Mars, they are natural leaders, assertive, and driven by passion. They can be impulsive but are also incredibly energetic and direct.' },
   { id: 'taurus', name: 'Taurus', symbol: '♉', description: 'Taurus is an Earth sign, symbolizing stability, practicality, and determination. Ruled by Venus, they appreciate beauty, comfort, and luxury. Taureans are known for their patience and persistence, but can also be stubborn and resistant to change.' },
@@ -149,7 +161,7 @@ const zodiacSignsData = [
   { id: 'scorpio', name: 'Scorpio', symbol: '♏', description: 'Scorpio is a Water sign ruled by Pluto (and Mars), representing intensity, transformation, and power. Scorpios are passionate, mysterious, and deeply emotional, with a strong intuition. They are fiercely determined but can also be secretive and possessive.' },
   { id: 'sagittarius', name: 'Sagittarius', symbol: '♐', description: 'Sagittarius, a Fire sign ruled by Jupiter, embodies adventure, optimism, and a love for freedom. Sagittarians are philosophical, enthusiastic, and always seeking new experiences. They are honest but can be tactless and restless.' },
   { id: 'capricorn', name: 'Capricorn', symbol: '♑', description: 'Capricorn is an Earth sign ruled by Saturn, symbolizing discipline, ambition, and responsibility. Capricorns are practical, patient, and driven to achieve their goals. They are reliable but can be rigid and overly serious.' },
-  { id: 'aquarius', name: 'Aquarius', symbol: '♒', description: 'Aquarius, an Air sign ruled by Uranus (and Saturn), represents innovation, independence, and humanitarianism. Aquarians are intellectual, progressive, and value freedom and equality. They can be eccentric and detached but are visionaries.' },
+  { id: 'aquarius', name: 'Aquarius', symbol: '♒', description: 'Aquarius, an Air sign ruled by Uranus (and Saturn), represents innovation, independence, and humanitarianism. Aquarians are intellectual, progressive, and value freedom and equality. They can be eccentric and detached but are visionaries.' }, // Removed 'федерации.' here
   { id: 'pisces', name: 'Pisces', symbol: '♓', description: 'Pisces is a Water sign ruled by Neptune (and Jupiter), symbolizing compassion, intuition, and artistic sensitivity. Pisceans are dreamy, empathetic, and highly imaginative. They can be escapist and overly sensitive but possess deep spiritual wisdom.' },
 ];
 
@@ -505,13 +517,13 @@ function App() {
             <CelticCrossLayout />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-              {celticCrossSelections.map((position: CelticCrossSelectionItem) => ( // Explicitly typed here
+              {celticCrossSelections.map((position: CelticCrossSelectionItem) => (
                 <div key={position.id} className="bg-purple-900 p-4 rounded-lg shadow-md border border-purple-700">
                   <h3 className="text-lg font-medium text-purple-100 mb-2">{position.name}</h3>
                   {/* Card Selection Dropdown */}
                   <select
                     className="w-full p-2 mb-3 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    value={position.cardId || ''} // Ensure value is always a string
+                    value={position.cardId as any} // Explicitly cast to any here
                     onChange={(e) => handleCardSelect(position.id, e.target.value)}
                   >
                     <option value="">Select Card</option>
