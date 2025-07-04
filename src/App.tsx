@@ -44,34 +44,22 @@ const allTarotCards = [
 
 // Represents the 12 positions of the Celtic Cross and Staff spread
 const celticCrossPositions = [
-  { id: 1, name: '1. Past' }, // Changed to number
-  { id: 2, name: '2. Present' }, // Changed to number
-  { id: 3, name: '3. What got you here' }, // Changed to number
-  { id: 4, 'name': '4. Obstacle' }, // Changed to number
-  { id: 5, name: '5. What\'s next' }, // Changed to number
-  { id: 6, name: '6. Future' }, // Changed to number
-  { id: 7, name: '7. You/Yourself' }, // Changed to number
-  { id: 8, name: '8. External Influence' }, // Changed to number
-  { id: 9, name: '9. What you need to know' }, // Changed to number
-  { id: 10, name: '10. Outcome 1' }, // Changed to number
-  { id: 11, name: '11. Outcome 2' }, // Changed to number
-  { id: 12, name: '12. Outcome 3' }, // Changed to number
+  { id: 1, name: '1. Past' },
+  { id: 2, name: '2. Present' },
+  { id: 3, name: '3. What got you here' },
+  { id: 4, 'name': '4. Obstacle' },
+  { id: 5, name: '5. What\'s next' },
+  { id: 6, name: '6. Future' },
+  { id: 7, name: '7. You/Yourself' },
+  { id: 8, name: '8. External Influence' },
+  { id: 9, name: '9. What you need to know' },
+  { id: 10, name: '10. Outcome 1' },
+  { id: 11, name: '11. Outcome 2' },
+  { id: 12, name: '12. Outcome 3' },
 ];
 
-// New: Positions for Three Card Spread
-const threeCardPositions = [
-  { id: 1, name: '1. Past' }, // Changed to number
-  { id: 2, name: '2. Present' }, // Changed to number
-  { id: 3, name: '3. Future' }, // Changed to number
-];
-
-// New: Positions for Heart and Head Spread (based on your image)
-const heartAndHeadPositions = [
-  { id: 1, name: '1. Your Spiritual Self' }, // Changed to number
-  { id: 2, name: '2. What You Think' }, // Changed to number
-  { id: 3, name: '3. What You Feel' }, // Changed to number
-  { id: 4, name: '4. The Heart of the Matter' }, // Changed to number
-];
+// Removed unused threeCardPositions and heartAndHeadPositions for now to clear TS6133 warnings.
+// They can be re-added when their functionality is implemented.
 
 
 // --- Updated: Menu Structure Data ---
@@ -318,14 +306,21 @@ const GenericSpreadLayout: React.FC<{ spreadName: string }> = ({ spreadName }) =
   </div>
 );
 
+// Explicit type for CelticCrossSelectionItem
+interface CelticCrossSelectionItem {
+  id: number;
+  name: string;
+  cardId: string;
+  orientation: 'upright' | 'reversed';
+}
 
 function App() {
   const [showHomeScreen, setShowHomeScreen] = useState(true); // New state for home screen
   const [selectedMenuItem, setSelectedMenuItem] = useState('celticCross'); // Default to Celtic Cross after home screen
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu toggle
 
-  // State to store selected cards for Celtic Cross spread
-  const [celticCrossSelections, setCelticCrossSelections] = useState(
+  // State to store selected cards for Celtic Cross spread, with explicit type
+  const [celticCrossSelections, setCelticCrossSelections] = useState<CelticCrossSelectionItem[]>(
     celticCrossPositions.map(pos => ({ ...pos, cardId: '', orientation: 'upright' }))
   );
   // State for the card selected in the Card Selection Tool tab
@@ -347,7 +342,7 @@ function App() {
   const apiUrl = 'https://cpif4zh0bf.execute-api.eu-north-1.amazonaws.com/prod'; // <<< PASTE YOUR URL HERE
 
   // Handle card selection for a specific position in Celtic Cross
-  const handleCardSelect = useCallback((positionId: number, cardId: string) => { // Changed positionId to number
+  const handleCardSelect = useCallback((positionId: number, cardId: string) => {
     setCelticCrossSelections(prevSelections =>
       prevSelections.map(selection =>
         selection.id === positionId ? { ...selection, cardId: cardId } : selection
@@ -358,7 +353,7 @@ function App() {
   }, []);
 
   // Handle orientation selection for a specific position in Celtic Cross
-  const handleOrientationSelect = useCallback((positionId: number, orientation: 'upright' | 'reversed') => { // Changed positionId to number
+  const handleOrientationSelect = useCallback((positionId: number, orientation: 'upright' | 'reversed') => {
     setCelticCrossSelections(prevSelections =>
       prevSelections.map(selection =>
         selection.id === positionId ? { ...selection, orientation: orientation } : selection
@@ -415,7 +410,7 @@ function App() {
 
 
   // Generate the reading message based on selected cards for Spreads via AWS Lambda proxy
-  const generateRead = useCallback(async (spreadType: string, spreadPositions: {id: number; name: string}[], selections: typeof celticCrossSelections) => { // Changed id to number
+  const generateRead = useCallback(async (spreadType: string, spreadPositions: {id: number; name: string}[], selections: CelticCrossSelectionItem[]) => {
     const selectedCardsDetails = selections
       .filter(selection => selection.cardId)
       .map(selection => {
@@ -510,13 +505,13 @@ function App() {
             <CelticCrossLayout />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-              {celticCrossSelections.map(position => (
+              {celticCrossSelections.map((position: CelticCrossSelectionItem) => ( // Explicitly typed here
                 <div key={position.id} className="bg-purple-900 p-4 rounded-lg shadow-md border border-purple-700">
                   <h3 className="text-lg font-medium text-purple-100 mb-2">{position.name}</h3>
                   {/* Card Selection Dropdown */}
                   <select
                     className="w-full p-2 mb-3 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    value={position.cardId}
+                    value={position.cardId || ''} // Ensure value is always a string
                     onChange={(e) => handleCardSelect(position.id, e.target.value)}
                   >
                     <option value="">Select Card</option>
