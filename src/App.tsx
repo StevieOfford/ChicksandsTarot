@@ -58,29 +58,19 @@ const celticCrossPositions = [
   { id: 12, name: '12. Outcome 3' },
 ];
 
-<<<<<<< HEAD
-// New: Positions for Three Card Spread (currently unused in renderContent, but part of planned structure)
-=======
 // Positions for Three Card Spread
->>>>>>> dev
 const threeCardPositions = [
   { id: 1, name: '1. Past' },
   { id: 2, name: '2. Present' },
   { id: 3, name: '3. Future' },
 ];
 
-<<<<<<< HEAD
-// New: Positions for Heart and Head Spread (currently unused in renderContent, but part of planned structure)
-=======
 // Positions for Heart and Head Spread
->>>>>>> dev
 const heartAndHeadPositions = [
   { id: 1, name: '1. Your Spiritual Self' },
   { id: 2, name: '2. What You Think' },
   { id: 3, name: '3. What You Feel' },
   { id: 4, name: '4. The Heart of the Matter' },
-<<<<<<< HEAD
-=======
 ];
 
 // Positions for Past, Present & Future Spread (same as Three Card, but distinct name)
@@ -156,11 +146,10 @@ const deckBondingPositions = [
   { id: 2, name: '2. What energy does this deck bring to me?' },
   { id: 3, name: '3. How can we communicate more clearly?' },
   { id: 4, name: '4. How can we grow together?' },
->>>>>>> dev
 ];
 
 
-// --- Updated: Menu Structure Data ---
+// --- Menu Structure Data ---
 const menuItems = [
   {
     id: 'tarot',
@@ -244,11 +233,7 @@ const menuItems = [
   },
 ];
 
-<<<<<<< HEAD
-// --- Zodiac Signs Data (FIXED: Removed extraneous 'федерации.') ---
-=======
 // --- Zodiac Signs Data (FIXED: Removed extraneous '错了。') ---
->>>>>>> dev
 const zodiacSignsData = [
   { id: 'aries', name: 'Aries', symbol: '♈', description: 'Aries, the first sign of the zodiac, is known for its pioneering spirit, courage, and enthusiasm. Ruled by Mars, they are natural leaders, assertive, and driven by passion. They can be impulsive but are also incredibly energetic and direct.' },
   { id: 'taurus', name: 'Taurus', symbol: '♉', description: 'Taurus is an Earth sign, symbolizing stability, practicality, and determination. Ruled by Venus, they appreciate beauty, comfort, and luxury. Taureans are known for their patience and persistence, but can also be stubborn and resistant to change.' },
@@ -624,13 +609,6 @@ const DeckBondingLayout: React.FC = () => (
   </svg>
 );
 
-// Explicit type for CelticCrossSelectionItem
-interface CelticCrossSelectionItem {
-  id: number;
-  name: string;
-  cardId: string;
-  orientation: 'upright' | 'reversed';
-}
 
 // --- New: Spread Definition Interfaces ---
 interface SpreadPosition {
@@ -638,10 +616,6 @@ interface SpreadPosition {
   name: string;
 }
 
-<<<<<<< HEAD
-  // State to store selected cards for Celtic Cross spread, with explicit type
-  const [celticCrossSelections, setCelticCrossSelections] = useState<CelticCrossSelectionItem[]>(
-=======
 interface SpreadSelectionItem {
   id: number;
   name: string; // Position name
@@ -745,7 +719,6 @@ function App() {
   const [currentSpreadType, setCurrentSpreadType] = useState<string>('celticCross');
   const [currentSpreadPositions, setCurrentSpreadPositions] = useState<SpreadPosition[]>(celticCrossPositions);
   const [currentSpreadSelections, setCurrentSpreadSelections] = useState<SpreadSelectionItem[]>(
->>>>>>> dev
     celticCrossPositions.map(pos => ({ ...pos, cardId: '', orientation: 'upright' }))
   );
   // --- End New State ---
@@ -760,15 +733,9 @@ function App() {
 
   const apiUrl = 'https://cpif4zh0bf.execute-api.eu-north-1.amazonaws.com/prod';
 
-<<<<<<< HEAD
-  // Handle card selection for a specific position in Celtic Cross
-  const handleCardSelect = useCallback((positionId: number, cardId: string) => {
-    setCelticCrossSelections(prevSelections =>
-=======
   // --- Refactored handleCardSelect to be generic ---
   const handleCardSelect = useCallback((positionId: number, cardId: string) => {
     setCurrentSpreadSelections(prevSelections =>
->>>>>>> dev
       prevSelections.map(selection =>
         selection.id === positionId ? { ...selection, cardId: cardId } : selection
       )
@@ -777,15 +744,9 @@ function App() {
     setLlmInterpretation('');
   }, []);
 
-<<<<<<< HEAD
-  // Handle orientation selection for a specific position in Celtic Cross
-  const handleOrientationSelect = useCallback((positionId: number, orientation: 'upright' | 'reversed') => {
-    setCelticCrossSelections(prevSelections =>
-=======
   // --- Refactored handleOrientationSelect to be generic ---
   const handleOrientationSelect = useCallback((positionId: number, orientation: 'upright' | 'reversed') => {
     setCurrentSpreadSelections(prevSelections =>
->>>>>>> dev
       prevSelections.map(selection =>
         selection.id === positionId ? { ...selection, orientation: orientation } : selection
       )
@@ -837,18 +798,12 @@ function App() {
   }, [selectedCardForMeaning, selectedMenuItem, fetchCardMeaning]);
 
 
-<<<<<<< HEAD
-  // Generate the reading message based on selected cards for Spreads via AWS Lambda proxy
-  const generateRead = useCallback(async (spreadType: string, spreadPositions: {id: number; name: string}[], selections: CelticCrossSelectionItem[]) => {
-    const selectedCardsDetails = selections
-=======
   // --- Refactored generateRead to be generic ---
   const generateRead = useCallback(async () => {
     const spreadDef = spreadDefinitions[currentSpreadType];
     if (!spreadDef) return; // Should not happen
 
     const selectedCardsDetails = currentSpreadSelections
->>>>>>> dev
       .filter(selection => selection.cardId)
       .map(selection => {
         const card = allTarotCards.find(c => c.id === selection.cardId);
@@ -945,10 +900,6 @@ function App() {
 
   // --- Refactored Render Content Based on Selected Menu Item ---
   const renderContent = () => {
-<<<<<<< HEAD
-    // Helper to find parent category name for display in placeholders
-=======
->>>>>>> dev
     const currentItemName = menuItems.find(m => m.id === selectedMenuItem)?.name ||
                             menuItems.find(m => m.subItems?.some(s => s.id === selectedMenuItem))?.subItems?.find(s => s.id === selectedMenuItem)?.name ||
                             menuItems.find(m => m.subItems?.some(s => s.subItems?.some(ss => ss.id === selectedMenuItem)))?.subItems?.find(s => s.subItems?.some(ss => ss.id === selectedMenuItem))?.subItems?.find(ss => ss.id === selectedMenuItem)?.name ||
@@ -967,35 +918,10 @@ function App() {
             {spreadDef.description}
           </p>
 
-<<<<<<< HEAD
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-              {celticCrossSelections.map((position: CelticCrossSelectionItem) => (
-                <div key={position.id} className="bg-purple-900 p-4 rounded-lg shadow-md border border-purple-700">
-                  <h3 className="text-lg font-medium text-purple-100 mb-2">{position.name}</h3>
-                  {/* Card Selection Dropdown */}
-                  <select
-                    className="w-full p-2 mb-3 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                    value={position.cardId as any} // Explicitly cast to any here
-                    onChange={(e) => handleCardSelect(position.id, e.target.value)}
-                  >
-                    <option value="">Select Card</option>
-                    {allTarotCards.map(card => (
-                      // Only show cards that are not yet selected, OR the card currently selected for this position
-                      <option
-                        key={card.id}
-                        value={card.id}
-                        disabled={celticCrossSelections.some(sel => sel.cardId === card.id && sel.id !== position.id)}
-                      >
-                        {card.name}
-                      </option>
-                    ))}
-                  </select>
-=======
           {/* Render the specific layout component for the spread */}
           {LayoutComponent && (
             <LayoutComponent />
           )}
->>>>>>> dev
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
             {currentSpreadSelections.map((position: SpreadSelectionItem) => (
@@ -1160,10 +1086,6 @@ function App() {
           </div>
         );
 
-<<<<<<< HEAD
-      // --- Witches Runes Content ---
-=======
->>>>>>> dev
       case 'witchesRunes':
         return (
           <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
@@ -1269,11 +1191,7 @@ function App() {
           <h1 className="text-5xl sm:text-6xl font-bold mb-6 text-center text-white animate-pulse">Chicksands Tarot</h1>
           {/* Main content box: now with max-height and overflow-y-auto */}
           <div className="bg-purple-900 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-700 max-w-2xl text-center
-<<<<<<< HEAD
-                          max-h-[70vh] overflow-y-auto flex flex-col items-center justify-center"> {/* Adjusted max-h and added flex for centering content within scrollable area */}
-=======
                           max-h-[70vh] overflow-y-auto flex flex-col items-center justify-center">
->>>>>>> dev
             <h2 className="text-3xl font-semibold mb-4 text-purple-200">Embrace the Wisdom of Pagan Divination</h2>
             <p className="text-lg text-purple-300 mb-6 leading-relaxed">
               Welcome to Chicksands Tarot, your digital sanctuary for exploring the ancient art of divination. Rooted in the rich traditions of Paganism, this app offers a unique journey into self-discovery and spiritual insight.
@@ -1306,19 +1224,11 @@ function App() {
           </button>
 
           {/* Main Content Area */}
-          {/* Added pt-20 to push content down on small screens to avoid overlap with fixed menu button */}
           <div className={`flex-1 p-4 sm:p-8 flex flex-col items-center transition-all duration-300 ease-in-out
-<<<<<<< HEAD
-                          ${isMenuOpen ? 'sm:ml-64' : 'sm:ml-0'} pt-20 sm:pt-8`}> {/* Adjusted padding-top for mobile */}
-            <h1 className="text-4xl sm:text-5xl font-bold mb-8 text-center text-white">Chicksands Tarot</h1>
-
-            {/* Menu Sidebar - Moved here to ensure it's rendered after the main content adjustment */}
-=======
                           ${isMenuOpen ? 'sm:ml-64' : 'sm:ml-0'} pt-20 sm:pt-8`}>
             <h1 className="text-4xl sm:text-5xl font-bold mb-8 text-center text-white">Chicksands Tarot</h1>
 
             {/* Menu Sidebar - Still rendered here, fixed positioning handles its visual placement */}
->>>>>>> dev
             <Menu
               menuItems={menuItems}
               selectedItem={selectedMenuItem}
