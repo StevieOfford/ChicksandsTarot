@@ -233,7 +233,7 @@ const menuItems = [
   },
 ];
 
-// --- Zodiac Signs Data (FIXED: Removed extraneous '错了。') ---
+// --- Zodiac Signs Data ---
 const zodiacSignsData = [
   { id: 'aries', name: 'Aries', symbol: '♈', description: 'Aries, the first sign of the zodiac, is known for its pioneering spirit, courage, and enthusiasm. Ruled by Mars, they are natural leaders, assertive, and driven by passion. They can be impulsive but are also incredibly energetic and direct.' },
   { id: 'taurus', name: 'Taurus', symbol: '♉', description: 'Taurus is an Earth sign, symbolizing stability, practicality, and determination. Ruled by Venus, they appreciate beauty, comfort, and luxury. Taureans are known for their patience and persistence, but can also be stubborn and resistant to change.' },
@@ -249,7 +249,7 @@ const zodiacSignsData = [
   { id: 'pisces', name: 'Pisces', symbol: '♓', description: 'Pisces is a Water sign ruled by Neptune (and Jupiter), symbolizing compassion, intuition, and artistic sensitivity. Pisceans are dreamy, empathetic, and highly imaginative. They can be escapist and overly sensitive but possess deep spiritual wisdom.' },
 ];
 
-// --- New: Witches Runes Data ---
+// --- Witches Runes Data ---
 const witchesRunesData = [
   { id: 'ring', name: 'Ring', symbol: '⚪', description: 'Represents cycles, wholeness, partnership, and completion. It can signify a new beginning or the end of a phase.' },
   { id: 'wave', name: 'Wave', symbol: '🌊', description: 'Symbolizes emotions, intuition, flow, and adaptability. It relates to water, feelings, and the unconscious mind.' },
@@ -266,7 +266,7 @@ const witchesRunesData = [
   { id: 'crossroads', name: 'Crossroads', symbol: '➕', description: 'A more direct symbol for choices, decisions, and the intersection of paths. Similar to Crossed Lines but often more about a clear path forward.' },
 ];
 
-// NEW: Elder Futhark Runes Data (24 runes)
+// Elder Futhark Runes Data (24 runes)
 const elderFutharkRunesData = [
   { id: 'fehu', name: 'Fehu', symbol: 'ᚠ', description: 'Cattle, wealth, abundance, financial strength, new beginnings.' },
   { id: 'uruz', name: 'Uruz', symbol: 'ᚢ', description: 'Wild ox, strength, untamed potential, raw power, good health.' },
@@ -283,7 +283,7 @@ const elderFutharkRunesData = [
   { id: 'eihwaz', name: 'Eihwaz', symbol: 'ᛇ', description: 'Yew tree, strength, reliability, endurance, transformation, death and rebirth.' },
   { id: 'perthro', name: 'Perthro', symbol: 'ᛈ', description: 'Lot cup, mystery, fate, hidden knowledge, chance, secrets.' },
   { id: 'algiz', name: 'Algiz', symbol: 'z', description: 'Elk, protection, defense, guardian, spiritual connection, divine blessing.' },
-  { id: 'sowilo', name: 'Sowilo', symbol: 'ᛊ', description: 'Sun, success, honor, wholeness, life force, victory.' },
+  { id: 'sowilo', name: 'Sowilo', symbol: 'ᛊ', description: 'Sun, success, honor, wholeness, life force, enlightenment.' },
   { id: 'tiwaz', name: 'Tiwaz', symbol: 'ᛏ', description: 'Tyr, justice, sacrifice, victory, leadership, courage.' },
   { id: 'berkano', name: 'Berkano', symbol: 'ᛒ', description: 'Birch goddess, growth, new beginnings, fertility, regeneration.' },
   { id: 'ehwaz', name: 'Ehwaz', symbol: 'ᛖ', description: 'Horse, movement, progress, partnership, trust, loyalty.' },
@@ -294,7 +294,7 @@ const elderFutharkRunesData = [
   { id: 'othala', name: 'Othala', symbol: 'ᛟ', description: 'Inheritance, homeland, property, ancestry, spiritual heritage, tradition.' },
 ];
 
-// NEW: Younger Futhark Runes Data (16 runes)
+// Younger Futhark Runes Data (16 runes)
 const youngerFutharkRunesData = [
   { id: 'fe', name: 'Fé', symbol: 'ᚠ', description: 'Wealth, cattle, prosperity, material possessions.' },
   { id: 'ur', name: 'Úr', symbol: 'ᚢ', description: 'Iron, dross, rain, primeval mist, strength, origin.' },
@@ -312,6 +312,28 @@ const youngerFutharkRunesData = [
   { id: 'madhr', name: 'Maðr', symbol: 'ᛘ', description: 'Man, humanity, self, community, social order, intelligence.' },
   { id: 'logr', name: 'Logr', symbol: 'ᛚ', description: 'Water, lake, flow, intuition, emotions, dreams, subconscious.' },
   { id: 'yr', name: 'Ýr', symbol: 'ᛦ', description: 'Yew, bow, death, transformation, reliability, defense.' },
+];
+
+// Common Crystals Data (removed imageUrl, will be generated)
+const commonCrystalsData = [
+  { id: 'amethyst', name: 'Amethyst', description: 'Promotes calm, balance, and peace. Aids in meditation and spiritual awareness. Known for its protective qualities.' },
+  { id: 'clear-quartz', name: 'Clear Quartz', description: 'The "Master Healer." Amplifies energy and thought, as well as the effect of other crystals. Cleanses and balances all chakras.' },
+  { id: 'rose-quartz', name: 'Rose Quartz', description: 'The stone of unconditional love. Opens the heart to all forms of love: self-love, family love, platonic love, and romantic love. Promotes compassion and forgiveness.' },
+  { id: 'selenite', name: 'Selenite', description: 'Cleansing and charging crystal. Promotes mental clarity, peace, and higher consciousness. Can be used to cleanse other crystals.' },
+  { id: 'black-tourmaline', name: 'Black Tourmaline', description: 'A powerful protection stone. Shields against negative energies, psychic attacks, and environmental pollutants. Grounds spiritual energy.' },
+  { id: 'citrine', name: 'Citrine', description: 'Stone of abundance and joy. Attracts wealth, prosperity, and success. Boosts self-confidence and creativity. Does not require cleansing.' },
+  { id: 'labradorite', name: 'Labradorite', description: 'Stone of transformation and magic. Awakens spiritual abilities and intuition. Protects the aura and deflects negative energies.' },
+];
+
+// NEW: Common Deities Data
+const commonDeitiesData = [
+  { id: 'freya', name: 'Freya', description: 'Norse goddess of love, beauty, fertility, war, and death. Associated with seiðr (magic) and gold.' },
+  { id: 'odin', name: 'Odin', description: 'Norse Allfather, god of wisdom, poetry, death, magic, and war. Associated with ravens, wolves, and the runic alphabet.' },
+  { id: 'loki', name: 'Loki', description: 'Norse trickster god, associated with mischief, fire, and magic. A complex figure who can be both helpful and harmful.' },
+  { id: 'brigid', name: 'Brigid', description: 'Celtic goddess of poetry, healing, smithcraft, and spring. Celebrated during Imbolc.' },
+  { id: 'horus', name: 'Horus', description: 'Egyptian god of kingship, the sky, and protection. Often depicted with the head of a falcon.' },
+  { id: 'isis', name: 'Isis', description: 'Egyptian goddess of magic, motherhood, healing, and rebirth. A powerful and benevolent figure.' },
+  { id: 'hades', name: 'Hades', description: 'Greek god of the underworld and the dead, and the riches of the earth. Often misunderstood, he is a just ruler.' },
 ];
 
 
@@ -710,6 +732,163 @@ const spreadDefinitions: { [key: string]: SpreadDefinition } = {
 };
 
 
+// Crystal Search Result Modal Component
+interface CrystalSearchModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  crystalName: string;
+  imageUrl: string | null;
+  meaningText: string;
+  isLoadingImage: boolean;
+  isLoadingMeaning: boolean;
+}
+
+const CrystalSearchModal: React.FC<CrystalSearchModalProps> = ({
+  isOpen,
+  onClose,
+  crystalName,
+  imageUrl,
+  meaningText,
+  isLoadingImage,
+  isLoadingMeaning,
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+      <div className="bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800 max-w-lg w-full text-center relative">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-purple-200 hover:text-white text-3xl font-bold focus:outline-none"
+        >
+          &times;
+        </button>
+        <h3 className="text-3xl font-semibold mb-6 text-purple-200">
+          {crystalName ? `About ${crystalName}` : 'Crystal Search Result'}
+        </h3>
+
+        <div className="flex flex-col items-center mb-6">
+          {isLoadingImage ? (
+            <div className="w-40 h-40 flex items-center justify-center bg-purple-700 rounded-full mb-4 border-2 border-purple-600 shadow-lg text-sm text-purple-300">
+              Generating Image...
+            </div>
+          ) : imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={crystalName}
+              className="w-40 h-40 object-cover rounded-full mb-4 border-2 border-purple-600 shadow-lg"
+              onError={(e) => {
+                e.currentTarget.src = `https://placehold.co/160x160/7B68EE/FFFFFF?text=Crystal`; // Larger generic fallback
+                console.error(`Failed to load AI image for searched crystal ${crystalName}.`);
+              }}
+            />
+          ) : (
+            imageUrl === 'error' && ( // Only show error if explicitly errored
+              <div className="w-40 h-40 flex items-center justify-center bg-red-700 text-white rounded-full mb-4 border-2 border-red-600 shadow-lg text-sm">
+                Image Error
+              </div>
+            )
+          )}
+        </div>
+
+        <div className="bg-purple-800 p-4 rounded-lg shadow-inner text-purple-100 max-h-60 overflow-y-auto">
+          <p className="text-lg text-center">
+            {isLoadingMeaning ? 'Please wait, generating crystal information...' : (
+              <span dangerouslySetInnerHTML={{ __html: meaningText.replace(/\n/g, '<br />') }} />
+            )}
+          </p>
+        </div>
+
+        <button
+          onClick={onClose}
+          className="mt-6 px-6 py-2 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// NEW: Deity Search Result Modal Component (Copied from CrystalSearchModal)
+interface DeitySearchModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  deityName: string;
+  imageUrl: string | null;
+  meaningText: string;
+  isLoadingImage: boolean;
+  isLoadingMeaning: boolean;
+}
+
+const DeitySearchModal: React.FC<DeitySearchModalProps> = ({
+  isOpen,
+  onClose,
+  deityName,
+  imageUrl,
+  meaningText,
+  isLoadingImage,
+  isLoadingMeaning,
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+      <div className="bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800 max-w-lg w-full text-center relative">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-purple-200 hover:text-white text-3xl font-bold focus:outline-none"
+        >
+          &times;
+        </button>
+        <h3 className="text-3xl font-semibold mb-6 text-purple-200">
+          {deityName ? `About ${deityName}` : 'Deity Search Result'}
+        </h3>
+
+        <div className="flex flex-col items-center mb-6">
+          {isLoadingImage ? (
+            <div className="w-40 h-40 flex items-center justify-center bg-purple-700 rounded-full mb-4 border-2 border-purple-600 shadow-lg text-sm text-purple-300">
+              Generating Image...
+            </div>
+          ) : imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={deityName}
+              className="w-40 h-40 object-cover rounded-full mb-4 border-2 border-purple-600 shadow-lg"
+              onError={(e) => {
+                e.currentTarget.src = `https://placehold.co/160x160/7B68EE/FFFFFF?text=Deity`; // Larger generic fallback
+                console.error(`Failed to load AI image for searched deity ${deityName}.`);
+              }}
+            />
+          ) : (
+            imageUrl === 'error' && (
+              <div className="w-40 h-40 flex items-center justify-center bg-red-700 text-white rounded-full mb-4 border-2 border-red-600 shadow-lg text-sm">
+                Image Error
+              </div>
+            )
+          )}
+        </div>
+
+        <div className="bg-purple-800 p-4 rounded-lg shadow-inner text-purple-100 max-h-60 overflow-y-auto">
+          <p className="text-lg text-center">
+            {isLoadingMeaning ? 'Please wait, generating deity information...' : (
+              <span dangerouslySetInnerHTML={{ __html: meaningText.replace(/\n/g, '<br />') }} />
+            )}
+          </p>
+        </div>
+
+        <button
+          onClick={onClose}
+          className="mt-6 px-6 py-2 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+};
+
+
 function App() {
   const [showHomeScreen, setShowHomeScreen] = useState(true);
   const [selectedMenuItem, setSelectedMenuItem] = useState('celticCross'); // Default to Celtic Cross
@@ -727,11 +906,106 @@ function App() {
   const [cardMeaningText, setCardMeaningText] = useState('Select a card to see its meaning.');
   const [isLoadingCardMeaning, setIsLoadingCardMeaning] = useState(false);
 
+  const [crystalSearchTerm, setCrystalSearchTerm] = useState('');
+  const [crystalMeaningText, setCrystalMeaningText] = useState('Search for any crystal to learn its properties.');
+  const [isLoadingCrystalMeaning, setIsLoadingCrystalMeaning] = useState(false);
+
+  // State for dynamically generated crystal images for common crystals
+  const [commonCrystalImages, setCommonCrystalImages] = useState<Record<string, string>>({});
+  const [loadingCommonCrystalImages, setLoadingCommonCrystalImages] = useState<Record<string, boolean>>({});
+
+  // State for dynamically generated crystal image for search result
+  const [searchedCrystalImage, setSearchedCrystalImage] = useState<string | null>(null);
+  const [isLoadingSearchedCrystalImage, setIsLoadingSearchedCrystalImage] = useState(false);
+  // State to control modal visibility for crystals
+  const [showCrystalSearchModal, setShowCrystalSearchModal] = useState(false);
+
+  // NEW: State for dynamically generated deity images for common deities
+  const [commonDeityImages, setCommonDeityImages] = useState<Record<string, string>>({});
+  const [loadingCommonDeityImages, setLoadingCommonDeityImages] = useState<Record<string, boolean>>({});
+
+  // NEW: State for dynamically generated deity image for search result
+  const [deitySearchTerm, setDeitySearchTerm] = useState('');
+  const [deityMeaningText, setDeityMeaningText] = useState('Search for any deity to learn about them.');
+  const [isLoadingDeityMeaning, setIsLoadingDeityMeaning] = useState(false);
+  const [searchedDeityImage, setSearchedDeityImage] = useState<string | null>(null);
+  const [isLoadingSearchedDeityImage, setIsLoadingSearchedDeityImage] = useState(false);
+  // NEW: State to control modal visibility for deities
+  const [showDeitySearchModal, setShowDeitySearchModal] = useState(false);
+
+
   const [readMessage, setReadMessage] = useState('');
   const [llmInterpretation, setLlmInterpretation] = useState('');
   const [isLoadingInterpretation, setIsLoadingInterpretation] = useState(false);
 
-  const apiUrl = 'https://cpif4zh0bf.execute-api.eu-north-1.amazonaws.com/prod';
+  const apiUrl = 'https://cpif4zh0bf.execute-api.eu-north-1.amazonaws.com/prod'; // Your existing Lambda proxy URL
+
+  // Image generation API URL (Imagen 3.0)
+  const imageApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=`; // API key will be injected by Canvas
+
+  // Function to fetch AI-generated image for a crystal
+  const fetchCrystalImage = useCallback(async (crystalId: string, crystalName: string) => {
+    setLoadingCommonCrystalImages(prev => ({ ...prev, [crystalId]: true }));
+    setCommonCrystalImages(prev => ({ ...prev, [crystalId]: '' })); // Clear previous image
+
+    const prompt = `A realistic, high-quality photograph of a raw, natural ${crystalName} crystal, with soft, mystical lighting and a clean, dark background. Focus on the texture and natural form of the crystal.`;
+
+    try {
+      const payload = { instances: { prompt: prompt }, parameters: { "sampleCount": 1 } };
+      const response = await fetch(imageApiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+
+      if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
+        const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+        setCommonCrystalImages(prev => ({ ...prev, [crystalId]: imageUrl }));
+      } else {
+        console.error(`Failed to generate image for ${crystalName}:`, result);
+        setCommonCrystalImages(prev => ({ ...prev, [crystalId]: 'error' })); // Indicate error state
+      }
+    } catch (error) {
+      console.error(`Error generating image for ${crystalName}:`, error);
+      setCommonCrystalImages(prev => ({ ...prev, [crystalId]: 'error' })); // Indicate error state
+    } finally {
+      setLoadingCommonCrystalImages(prev => ({ ...prev, [crystalId]: false }));
+    }
+  }, [imageApiUrl]);
+
+
+  // NEW: Function to fetch AI-generated image for a deity
+  const fetchDeityImage = useCallback(async (deityId: string, deityName: string) => {
+    setLoadingCommonDeityImages(prev => ({ ...prev, [deityId]: true }));
+    setCommonDeityImages(prev => ({ ...prev, [deityId]: '' })); // Clear previous image
+
+    const prompt = `A mystical and respectful portrayal of ${deityName}, a deity, in a style appropriate to their mythology. Focus on their key attributes or symbols. Avoid modern or anachronistic elements.`;
+
+    try {
+      const payload = { instances: { prompt: prompt }, parameters: { "sampleCount": 1 } };
+      const response = await fetch(imageApiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+
+      if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
+        const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+        setCommonDeityImages(prev => ({ ...prev, [deityId]: imageUrl }));
+      } else {
+        console.error(`Failed to generate image for ${deityName}:`, result);
+        setCommonDeityImages(prev => ({ ...prev, [deityId]: 'error' })); // Indicate error state
+      }
+    } catch (error) {
+      console.error(`Error generating image for ${deityName}:`, error);
+      setCommonDeityImages(prev => ({ ...prev, [deityId]: 'error' })); // Indicate error state
+    } finally {
+      setLoadingCommonDeityImages(prev => ({ ...prev, [deityId]: false }));
+    }
+  }, [imageApiUrl]);
+
 
   // --- Refactored handleCardSelect to be generic ---
   const handleCardSelect = useCallback((positionId: number, cardId: string) => {
@@ -796,6 +1070,108 @@ function App() {
       fetchCardMeaning(card ? card.name : '');
     }
   }, [selectedCardForMeaning, selectedMenuItem, fetchCardMeaning]);
+
+  // UPDATED: Fetch Crystal Meaning and Image from LLM via AWS Lambda proxy
+  const fetchCrystalMeaning = useCallback(async () => {
+    if (!crystalSearchTerm.trim()) {
+      setCrystalMeaningText('Please enter a crystal name to search.');
+      setSearchedCrystalImage(null); // Clear image if search term is empty
+      return;
+    }
+
+    // Reset states and open modal
+    setCrystalMeaningText('Generating crystal information...');
+    setSearchedCrystalImage(null);
+    setIsLoadingCrystalMeaning(true);
+    setIsLoadingSearchedCrystalImage(true);
+    setShowCrystalSearchModal(true); // Open modal immediately
+
+    const textPrompt = `Provide a concise description of the metaphysical properties and uses of the crystal "${crystalSearchTerm.trim()}". Focus on its spiritual and energetic qualities relevant to divination or personal growth. If it's not a real crystal, state that it's not a recognized crystal and provide a general spiritual message.`;
+    const imagePrompt = `A realistic, high-quality photograph of a raw, natural ${crystalSearchTerm.trim()} crystal, with soft, mystical lighting and a clean, dark background. Focus on the texture and natural form of the crystal.`;
+
+    // Use Promise.allSettled to fetch both text and image concurrently
+    const [textResult, imageResult] = await Promise.allSettled([
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: textPrompt })
+      }).then(res => res.json()).catch(err => { throw err; }), // Re-throw to be caught by allSettled
+      fetch(imageApiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ instances: { prompt: imagePrompt }, parameters: { "sampleCount": 1 } })
+      }).then(res => res.json()).catch(err => { throw err; }) // Re-throw to be caught by allSettled
+    ]);
+
+    // Process text result
+    if (textResult.status === 'fulfilled' && textResult.value && textResult.value.interpretation) {
+      setCrystalMeaningText(textResult.value.interpretation);
+    } else {
+      setCrystalMeaningText('Failed to generate meaning. Please try again.');
+      console.error('Text generation failed:', textResult);
+    }
+    setIsLoadingCrystalMeaning(false);
+
+    // Process image result
+    if (imageResult.status === 'fulfilled' && imageResult.value && imageResult.value.predictions && imageResult.value.predictions.length > 0 && imageResult.value.predictions[0].bytesBase64Encoded) {
+      const imageUrl = `data:image/png;base64,${imageResult.value.predictions[0].bytesBase64Encoded}`;
+      setSearchedCrystalImage(imageUrl);
+    } else {
+      console.error(`Failed to generate image for ${crystalSearchTerm}:`, imageResult);
+      setSearchedCrystalImage('error'); // Indicate error state
+    }
+    setIsLoadingSearchedCrystalImage(false);
+
+  }, [crystalSearchTerm, apiUrl, imageApiUrl]);
+
+  // NEW: Fetch Deity Meaning and Image
+  const fetchDeityMeaning = useCallback(async () => {
+    if (!deitySearchTerm.trim()) {
+      setDeityMeaningText('Please enter a deity name to search.');
+      setSearchedDeityImage(null);
+      return;
+    }
+
+    setDeityMeaningText('Generating deity information...');
+    setSearchedDeityImage(null);
+    setIsLoadingDeityMeaning(true);
+    setIsLoadingSearchedDeityImage(true);
+    setShowDeitySearchModal(true); // Open modal immediately
+
+    const textPrompt = `Provide a concise description of the mythology, domain, and significance of the deity "${deitySearchTerm.trim()}". Focus on their role in spiritual practices or their symbolic meaning. If it's not a recognized deity, state that and provide a general spiritual message.`;
+    const imagePrompt = `A mystical and respectful portrayal of ${deitySearchTerm.trim()}, a deity, in a style appropriate to their mythology. Focus on their key attributes or symbols. Avoid modern or anachronistic elements.`;
+
+    const [textResult, imageResult] = await Promise.allSettled([
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: textPrompt })
+      }).then(res => res.json()).catch(err => { throw err; }),
+      fetch(imageApiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ instances: { prompt: imagePrompt }, parameters: { "sampleCount": 1 } })
+      }).then(res => res.json()).catch(err => { throw err; })
+    ]);
+
+    if (textResult.status === 'fulfilled' && textResult.value && textResult.value.interpretation) {
+      setDeityMeaningText(textResult.value.interpretation);
+    } else {
+      setDeityMeaningText('Failed to generate meaning. Please try again.');
+      console.error('Deity text generation failed:', textResult);
+    }
+    setIsLoadingDeityMeaning(false);
+
+    if (imageResult.status === 'fulfilled' && imageResult.value && imageResult.value.predictions && imageResult.value.predictions.length > 0 && imageResult.value.predictions[0].bytesBase64Encoded) {
+      const imageUrl = `data:image/png;base64,${imageResult.value.predictions[0].bytesBase64Encoded}`;
+      setSearchedDeityImage(imageUrl);
+    } else {
+      console.error(`Failed to generate image for ${deitySearchTerm}:`, imageResult);
+      setSearchedDeityImage('error');
+    }
+    setIsLoadingSearchedDeityImage(false);
+
+  }, [deitySearchTerm, apiUrl, imageApiUrl]);
 
 
   // --- Refactored generateRead to be generic ---
@@ -878,7 +1254,38 @@ function App() {
       setCurrentSpreadType(''); // Clear current spread type
       setCurrentSpreadPositions([]);
       setCurrentSpreadSelections([]);
-    } else {
+    } else if (selectedMenuItem === 'crystals') {
+      setCrystalSearchTerm('');
+      setCrystalMeaningText('Search for any crystal to learn its properties.');
+      setSearchedCrystalImage(null); // Clear search image when navigating to Crystals
+      setIsLoadingSearchedCrystalImage(false); // Reset loading state for search image
+      setShowCrystalSearchModal(false); // Close modal when navigating away from Crystals or re-entering
+      setCurrentSpreadType(''); // Clear spread type
+      setCurrentSpreadPositions([]);
+      setCurrentSpreadSelections([]);
+
+      // Trigger image generation for common crystals when Crystals tab is selected
+      // Added a delay between requests to avoid rate limiting/overloading the API
+      commonCrystalsData.forEach((crystal, index) => {
+        setTimeout(() => {
+          fetchCrystalImage(crystal.id, crystal.name);
+        }, index * 1500); // 1.5 second delay between each image request
+      });
+    } else if (selectedMenuItem === 'deities') { // NEW: Handle Deities selection
+      setDeitySearchTerm('');
+      setDeityMeaningText('Search for any deity to learn about them.');
+      setSearchedDeityImage(null);
+      setIsLoadingDeityMeaning(false);
+      setIsLoadingSearchedDeityImage(false);
+      setShowDeitySearchModal(false);
+
+      commonDeitiesData.forEach((deity, index) => {
+        setTimeout(() => {
+          fetchDeityImage(deity.id, deity.name);
+        }, index * 1500); // 1.5 second delay
+      });
+    }
+    else {
       // For other non-spread categories, clear spread-related states
       setCurrentSpreadType('');
       setCurrentSpreadPositions([]);
@@ -886,7 +1293,8 @@ function App() {
       setReadMessage('');
       setLlmInterpretation('');
     }
-  }, [selectedMenuItem]); // Dependency on selectedMenuItem
+  }, [selectedMenuItem, fetchCrystalImage, fetchDeityImage]); // Added fetchDeityImage to dependencies
+
 
   const handleMenuItemSelect = useCallback((itemId: string) => {
     setSelectedMenuItem(itemId);
@@ -1105,7 +1513,7 @@ function App() {
           </div>
         );
 
-      // NEW: Elder Futhark Runes Display
+      // Elder Futhark Runes Display
       case 'elderFuthark':
         return (
           <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
@@ -1125,7 +1533,7 @@ function App() {
           </div>
         );
 
-      // NEW: Younger Futhark Runes Display
+      // Younger Futhark Runes Display
       case 'youngerFuthark':
         return (
           <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
@@ -1145,6 +1553,170 @@ function App() {
           </div>
         );
 
+      // Crystals Section
+      case 'crystals':
+        return (
+          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
+            <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Crystals for Divination & Growth</h2>
+            <p className="text-md text-purple-300 mb-8 text-center">
+              Explore common crystals or search for any crystal to learn its metaphysical properties.
+            </p>
+
+            {/* AI Search Section for Crystals - Moved to top */}
+            <div className="mb-10 pb-8 border-b border-purple-700">
+              <h3 className="text-2xl font-semibold mb-4 text-purple-200 text-center">Search Any Crystal</h3>
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <input
+                  type="text"
+                  placeholder="e.g., Lapis Lazuli, Obsidian, Emerald..."
+                  className="flex-grow p-3 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
+                  value={crystalSearchTerm}
+                  onChange={(e) => setCrystalSearchTerm(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      fetchCrystalMeaning();
+                    }
+                  }}
+                  disabled={isLoadingCrystalMeaning || isLoadingSearchedCrystalImage}
+                />
+                <button
+                  className="px-6 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 text-lg"
+                  onClick={fetchCrystalMeaning}
+                  disabled={isLoadingCrystalMeaning || isLoadingSearchedCrystalImage}
+                >
+                  {isLoadingCrystalMeaning || isLoadingSearchedCrystalImage ? 'Searching...' : 'Search Crystal'}
+                </button>
+              </div>
+            </div>
+
+            {/* Common Crystals Section */}
+            <div className="mt-10"> {/* Added mt-10 for spacing after search bar */}
+              <h3 className="text-2xl font-semibold mb-4 text-purple-200 text-center">Common Crystals</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {commonCrystalsData.map(crystal => (
+                  <div key={crystal.id} className="bg-purple-800 p-4 rounded-lg shadow-md border border-purple-700 text-center flex flex-col items-center">
+                    <h4 className="text-xl font-semibold text-purple-100 mb-2">{crystal.name}</h4>
+                    {/* Conditional rendering for loading, image, or fallback */}
+                    {loadingCommonCrystalImages[crystal.id] ? (
+                      <div className="w-24 h-24 flex items-center justify-center bg-purple-700 rounded-full mb-3 border-2 border-purple-600 shadow-lg text-sm text-purple-300">
+                        Loading...
+                      </div>
+                    ) : commonCrystalImages[crystal.id] ? (
+                      <img
+                        src={commonCrystalImages[crystal.id]}
+                        alt={crystal.name}
+                        className="w-24 h-24 object-cover rounded-full mb-3 border-2 border-purple-600 shadow-lg"
+                        onError={(e) => {
+                          e.currentTarget.src = `https://placehold.co/100x100/7B68EE/FFFFFF?text=Crystal`; // Generic fallback
+                          console.error(`Failed to load AI image for ${crystal.name}.`);
+                        }}
+                      />
+                    ) : (
+                      <div className="w-24 h-24 flex items-center justify-center bg-purple-700 rounded-full mb-3 border-2 border-purple-600 shadow-lg text-sm text-purple-300">
+                        No Image
+                      </div>
+                    )}
+                    <p className="text-md text-purple-300 leading-relaxed">{crystal.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Crystal Search Result Modal */}
+            <CrystalSearchModal
+              isOpen={showCrystalSearchModal}
+              onClose={() => setShowCrystalSearchModal(false)}
+              crystalName={crystalSearchTerm}
+              imageUrl={searchedCrystalImage}
+              meaningText={crystalMeaningText}
+              isLoadingImage={isLoadingSearchedCrystalImage}
+              isLoadingMeaning={isLoadingCrystalMeaning}
+            />
+          </div>
+        );
+
+      // NEW: Deities Section (Copied from Crystals section and adapted)
+      case 'deities':
+        return (
+          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
+            <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Deities & Divine Beings</h2>
+            <p className="text-md text-purple-300 mb-8 text-center">
+              Explore common deities or search for any divine being to learn about their mythology and significance.
+            </p>
+
+            {/* AI Search Section for Deities - Moved to top */}
+            <div className="mb-10 pb-8 border-b border-purple-700">
+              <h3 className="text-2xl font-semibold mb-4 text-purple-200 text-center">Search Any Deity</h3>
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <input
+                  type="text"
+                  placeholder="e.g., Thor, Hecate, Anubis..."
+                  className="flex-grow p-3 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
+                  value={deitySearchTerm}
+                  onChange={(e) => setDeitySearchTerm(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      fetchDeityMeaning();
+                    }
+                  }}
+                  disabled={isLoadingDeityMeaning || isLoadingSearchedDeityImage}
+                />
+                <button
+                  className="px-6 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 text-lg"
+                  onClick={fetchDeityMeaning}
+                  disabled={isLoadingDeityMeaning || isLoadingSearchedDeityImage}
+                >
+                  {isLoadingDeityMeaning || isLoadingSearchedDeityImage ? 'Searching...' : 'Search Deity'}
+                </button>
+              </div>
+            </div>
+
+            {/* Common Deities Section */}
+            <div className="mt-10">
+              <h3 className="text-2xl font-semibold mb-4 text-purple-200 text-center">Common Deities</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {commonDeitiesData.map(deity => (
+                  <div key={deity.id} className="bg-purple-800 p-4 rounded-lg shadow-md border border-purple-700 text-center flex flex-col items-center">
+                    <h4 className="text-xl font-semibold text-purple-100 mb-2">{deity.name}</h4>
+                    {/* Conditional rendering for loading, image, or fallback */}
+                    {loadingCommonDeityImages[deity.id] ? (
+                      <div className="w-24 h-24 flex items-center justify-center bg-purple-700 rounded-full mb-3 border-2 border-purple-600 shadow-lg text-sm text-purple-300">
+                        Loading...
+                      </div>
+                    ) : commonDeityImages[deity.id] ? (
+                      <img
+                        src={commonDeityImages[deity.id]}
+                        alt={deity.name}
+                        className="w-24 h-24 object-cover rounded-full mb-3 border-2 border-purple-600 shadow-lg"
+                        onError={(e) => {
+                          e.currentTarget.src = `https://placehold.co/100x100/7B68EE/FFFFFF?text=Deity`; // Generic fallback
+                          console.error(`Failed to load AI image for ${deity.name}.`);
+                        }}
+                      />
+                    ) : (
+                      <div className="w-24 h-24 flex items-center justify-center bg-purple-700 rounded-full mb-3 border-2 border-purple-600 shadow-lg text-sm text-purple-300">
+                        No Image
+                      </div>
+                    )}
+                    <p className="text-md text-purple-300 leading-relaxed">{deity.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Deity Search Result Modal */}
+            <DeitySearchModal
+              isOpen={showDeitySearchModal}
+              onClose={() => setShowDeitySearchModal(false)}
+              deityName={deitySearchTerm}
+              imageUrl={searchedDeityImage}
+              meaningText={deityMeaningText}
+              isLoadingImage={isLoadingSearchedDeityImage}
+              isLoadingMeaning={isLoadingDeityMeaning}
+            />
+          </div>
+        );
+
       case 'earth':
       case 'wind':
       case 'fire':
@@ -1153,8 +1725,6 @@ function App() {
       case 'herbMagic':
       case 'incenseOils':
       case 'colourTheory':
-      case 'crystals':
-      case 'deities':
       case 'north':
       case 'east':
       case 'south':
