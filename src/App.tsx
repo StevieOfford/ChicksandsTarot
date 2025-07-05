@@ -310,7 +310,7 @@ const youngerFutharkRunesData = [
   { id: 'tyr', name: 'Týr', symbol: 'ᛏ', description: 'Tyr, justice, sacrifice, victory, leadership, courage.' },
   { id: 'bjarkan', name: 'Bjarkan', symbol: 'ᛒ', description: 'Birch, growth, new beginnings, fertility, family, regeneration.' },
   { id: 'madhr', name: 'Maðr', symbol: 'ᛘ', description: 'Man, humanity, self, community, social order, intelligence.' },
-  { id: 'logr', name: 'Logr', symbol: 'ᛚ', description: 'Water, lake, flow, intuition, emotions, dreams, subconscious.' },
+  { id: 'logr', name: 'Logr', symbol: 'ᛚ', description: 'Water, flow, intuition, emotions, dreams, subconscious.' },
   { id: 'yr', name: 'Ýr', symbol: 'ᛦ', description: 'Yew, bow, death, transformation, reliability, defense.' },
 ];
 
@@ -941,7 +941,14 @@ function App() {
   const apiUrl = 'https://cpif4zh0bf.execute-api.eu-north-1.amazonaws.com/prod'; // Your existing Lambda proxy URL
 
   // Image generation API URL (Imagen 3.0)
-  const imageApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=`; // API key will be injected by Canvas
+  // This approach ensures that 'process' is only accessed if it's defined (i.e., not in the Canvas preview).
+  // For Canvas preview, __initial_api_key will be used. For Amplify, REACT_APP_GEMINI_API_KEY will be used.
+  const API_KEY_FOR_IMAGEN = typeof __initial_api_key !== 'undefined'
+    ? __initial_api_key
+    : (typeof process !== 'undefined' && process.env.REACT_APP_GEMINI_API_KEY ? process.env.REACT_APP_GEMINI_API_KEY : "");
+
+  const imageApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${API_KEY_FOR_IMAGEN}`;
+
 
   // Function to fetch AI-generated image for a crystal
   const fetchCrystalImage = useCallback(async (crystalId: string, crystalName: string) => {
@@ -1114,7 +1121,7 @@ function App() {
 
     // Process image result
     if (imageResult.status === 'fulfilled' && imageResult.value && imageResult.value.predictions && imageResult.value.predictions.length > 0 && imageResult.value.predictions[0].bytesBase64Encoded) {
-      const imageUrl = `data:image/png;base64,${imageResult.value.predictions[0].bytesBase64Encoded}`;
+      const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
       setSearchedCrystalImage(imageUrl);
     } else {
       console.error(`Failed to generate image for ${crystalSearchTerm}:`, imageResult);
@@ -1163,7 +1170,7 @@ function App() {
     setIsLoadingDeityMeaning(false);
 
     if (imageResult.status === 'fulfilled' && imageResult.value && imageResult.value.predictions && imageResult.value.predictions.length > 0 && imageResult.value.predictions[0].bytesBase64Encoded) {
-      const imageUrl = `data:image/png;base64,${imageResult.value.predictions[0].bytesBase64Encoded}`;
+      const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
       setSearchedDeityImage(imageUrl);
     } else {
       console.error(`Failed to generate image for ${deitySearchTerm}:`, imageResult);
