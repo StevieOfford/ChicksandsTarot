@@ -231,6 +231,21 @@ const menuItems = [
       { id: 'youngerFuthark', name: 'Younger Futhark' },
     ],
   },
+  // NEW: Holidays Tab
+  {
+    id: 'holidays',
+    name: 'Holidays',
+    subItems: [
+      { id: 'yule', name: 'Yule (Winter Solstice)' },
+      { id: 'imbolc', name: 'Imbolc' },
+      { id: 'ostara', name: 'Ostara (Spring Equinox)' },
+      { id: 'beltane', name: 'Beltane' },
+      { id: 'litha', name: 'Litha (Summer Solstice)' },
+      { id: 'lughnasadh', name: 'Lughnasadh (Lammas)' },
+      { id: 'mabon', name: 'Mabon (Autumn Equinox)' },
+      { id: 'samhain', name: 'Samhain' },
+    ],
+  },
 ];
 
 // --- Zodiac Signs Data ---
@@ -317,7 +332,7 @@ const youngerFutharkRunesData = [
 // Common Crystals Data (removed imageUrl, will be generated)
 const commonCrystalsData = [
   { id: 'amethyst', name: 'Amethyst', description: 'Promotes calm, balance, and peace. Aids in meditation and spiritual awareness. Known for its protective qualities.' },
-  { id: 'clear-quartz', name: 'Clear Quartz', description: 'The "Master Healer." Amplifies energy and thought, as well as the effect of other crystals. Cleanses and balances all chakras.' },
+  { id: 'clear-quartz', name: 'Clear Quartz', description: 'The "Master Healer." Amplifies energy and thought, as well as the effect of other crystals. Cleanses and balances all chakras. ' },
   { id: 'rose-quartz', name: 'Rose Quartz', description: 'The stone of unconditional love. Opens the heart to all forms of love: self-love, family love, platonic love, and romantic love. Promotes compassion and forgiveness.' },
   { id: 'selenite', name: 'Selenite', description: 'Cleansing and charging crystal. Promotes mental clarity, peace, and higher consciousness. Can be used to cleanse other crystals.' },
   { id: 'black-tourmaline', name: 'Black Tourmaline', description: 'A powerful protection stone. Shields against negative energies, psychic attacks, and environmental pollutants. Grounds spiritual energy.' },
@@ -334,6 +349,147 @@ const commonDeitiesData = [
   { id: 'horus', name: 'Horus', description: 'Egyptian god of kingship, the sky, and protection. Often depicted with the head of a falcon.' },
   { id: 'isis', name: 'Isis', description: 'Egyptian goddess of magic, motherhood, healing, and rebirth. A powerful and benevolent figure.' },
   { id: 'hades', name: 'Hades', description: 'Greek god of the underworld and the dead, and the riches of the earth. Often misunderstood, he is a just ruler.' },
+];
+
+// NEW: Holiday Data Structure
+interface HolidayData {
+  id: string;
+  name: string;
+  date: string;
+  zodiac: string;
+  symbols: string[];
+  animals: string[];
+  deities: string[];
+  food: string[];
+  incense_oils: string[];
+  herbs_flowers: string[];
+  crystals_stones: string[];
+  colors: string[];
+  description: string; // Add a general description field
+}
+
+// NEW: Holidays Data (starting with Beltane, placeholders for others)
+const holidaysData: HolidayData[] = [
+  {
+    id: 'yule',
+    name: 'Yule (Winter Solstice)',
+    date: 'December 21-22',
+    zodiac: 'Capricorn',
+    symbols: ['Yule Log', 'Evergreens', 'Candles', 'Holly', 'Mistletoe', 'Wreaths'],
+    animals: ['Deer', 'Stag', 'Bear', 'Wolf', 'Robin'],
+    deities: ['Odin', 'Freya', 'Saturn', 'Holly King', 'Sun Gods'],
+    food: ['Roasted Meats', 'Gingerbread', 'Mulled Wine', 'Nuts', 'Apples', 'Cranberries'],
+    incense_oils: ['Pine', 'Cedar', 'Frankincense', 'Myrrh', 'Cinnamon'],
+    herbs_flowers: ['Pine', 'Cedar', 'Holly', 'Mistletoe', 'Ivy', 'Bay'],
+    crystals_stones: ['Garnet', 'Ruby', 'Bloodstone', 'Clear Quartz', 'Emerald'],
+    colors: ['Red', 'Green', 'Gold', 'Silver', 'White'],
+    description: 'Yule marks the Winter Solstice, the longest night of the year and the rebirth of the sun. It is a time for reflection, renewal, and celebrating the return of light.',
+  },
+  {
+    id: 'imbolc',
+    name: 'Imbolc',
+    date: 'February 1-2',
+    zodiac: 'Aquarius',
+    symbols: ['Candles', 'Snowdrops', 'White Flowers', 'Brighid\'s Cross', 'Lamps'],
+    animals: ['Sheep', 'Lambs', 'Groundhog', 'Robin'],
+    deities: ['Brigid', 'Maiden Aspects', 'Pan'],
+    food: ['Dairy', 'Seed Cakes', 'Herbal Teas', 'Onions', 'Garlic'],
+    incense_oils: ['Jasmine', 'Vanilla', 'Myrrh', 'Cinnamon', 'Frankincense'],
+    herbs_flowers: ['Snowdrop', 'Crocus', 'Willow', 'Blackberry', 'Angelica'],
+    crystals_stones: ['Amethyst', 'Garnet', 'Onyx', 'Bloodstone', 'Turquoise'],
+    colors: ['White', 'Silver', 'Light Blue', 'Green'],
+    description: 'Imbolc celebrates the first signs of spring and the quickening of the earth. It\'s a time for purification, new beginnings, and honoring the goddess Brigid.',
+  },
+  {
+    id: 'ostara',
+    name: 'Ostara (Spring Equinox)',
+    date: 'March 20-21',
+    zodiac: 'Aries',
+    symbols: ['Eggs', 'Rabbits', 'Spring Flowers', 'New Growth', 'Baskets'],
+    animals: ['Rabbits', 'Hares', 'Chicks', 'Birds'],
+    deities: ['Ostara', 'Eostre', 'Persephone', 'Maiden Aspects'],
+    food: ['Eggs', 'Honey Cakes', 'Leafy Greens', 'Sprouts', 'Spring Vegetables'],
+    incense_oils: ['Jasmine', 'Rose', 'Strawberry', 'Ginger', 'Sandalwood'],
+    herbs_flowers: ['Daffodil', 'Tulip', 'Crocus', 'Violet', 'Honeysuckle'],
+    crystals_stones: ['Rose Quartz', 'Amethyst', 'Moonstone', 'Aquamarine', 'Bloodstone'],
+    colors: ['Pastels', 'Green', 'Yellow', 'Pink', 'White'],
+    description: 'Ostara marks the Spring Equinox, a time of perfect balance between light and dark. It celebrates fertility, new life, and the awakening of nature.',
+  },
+  {
+    id: 'beltane',
+    name: 'Beltane',
+    date: 'May 1',
+    zodiac: 'Taurus, Gemini',
+    symbols: ['Maypoles', 'Wreaths', 'Colorful Ribbons', 'Bonfires', 'Flower Baskets', 'Garlands', 'Floral Crowns', 'Handfasting'],
+    animals: ['Bees', 'Deer', 'Cows', 'Horses', 'Rabbits & Hares', 'Doves', 'Swallows', 'Swans', 'Frogs', 'Cats', 'Lynx', 'Leopards', 'Butterflies'],
+    deities: ['Belenus', 'Cernunnos', 'Freya', 'Pan', 'Flora', 'Aphrodite', 'Diana', 'Artemis', 'Green Man'],
+    food: ['Dairy', 'Oatmeal', 'Honey', 'Breads', 'Cakes', 'Fruits & Berries', 'Herb-Infused Foods', 'Wine'],
+    incense_oils: ['Frankincense', 'Rose', 'Lilac', 'Mint', 'Jasmine', 'Thyme', 'Vanilla', 'Ylang Ylang', 'Lemon', 'Mugwort'],
+    herbs_flowers: ['Hawthorn', 'Mugwort', 'Lavender', 'Rose', 'Nettle', 'Dandelion', 'Bluebells', 'Violets', 'Mint', 'Yarrow'],
+    crystals_stones: ['Rose Quartz', 'Malachite', 'Carnelian', 'Sapphire', 'Tourmaline', 'Emerald'],
+    colors: ['Green', 'Blue', 'Yellow', 'Purple', 'Red', 'Pink', 'White'],
+    description: 'Beltane celebrates the peak of spring and the coming of summer. It is a festival of fertility, passion, and the blossoming of life, often marked by bonfires and Maypole dances.',
+  },
+  {
+    id: 'litha',
+    name: 'Litha (Summer Solstice)',
+    date: 'June 20-21',
+    zodiac: 'Cancer',
+    symbols: ['Sun Wheel', 'Oak Leaves', 'Bonfires', 'Herbs', 'Flowers', 'Honey', 'Sunflowers'],
+    animals: ['Horses', 'Stags', 'Eagles', 'Lions', 'Fireflies'],
+    deities: ['Sun Gods/Goddesses', 'Oak King', 'Green Man', 'Lugh', 'Apollo'],
+    food: ['Fresh Fruits', 'Summer Vegetables', 'Honey Cakes', 'Mead', 'Berries', 'Herbal Breads'],
+    incense_oils: ['Lemon', 'Orange', 'Pine', 'Cedar', 'Rosemary', 'Chamomile'],
+    herbs_flowers: ['Oak', 'Rose', 'Lavender', 'Chamomile', 'Sunflower', 'Daisy', 'Fennel'],
+    crystals_stones: ['Citrine', 'Amber', 'Tiger\'s Eye', 'Sunstone', 'Emerald', 'Peridot'],
+    colors: ['Gold', 'Yellow', 'Orange', 'Green', 'Red'],
+    description: 'Litha marks the Summer Solstice, the longest day of the year and the peak of the sun\'s power. It is a time for celebrating abundance, vitality, and light.',
+  },
+  {
+    id: 'lughnasadh',
+    name: 'Lughnasadh (Lammas)',
+    date: 'August 1-2',
+    zodiac: 'Leo',
+    symbols: ['Bread', 'Grain Sheaves', 'Corn Dollies', 'Sickle', 'Harvest Baskets'],
+    animals: ['Lions', 'Roosters', 'Grain-eating birds'],
+    deities: ['Lugh', 'Tailtiu', 'Demeter', 'Ceres', 'Harvest Deities'],
+    food: ['Freshly Baked Bread', 'Corn', 'Berries', 'Apples', 'Potatoes', 'Cider'],
+    incense_oils: ['Sandalwood', 'Cinnamon', 'Ginger', 'Clove', 'Cedar'],
+    herbs_flowers: ['Corn', 'Wheat', 'Barley', 'Sunflower', 'Marigold', 'Poppy'],
+    crystals_stones: ['Peridot', 'Carnelian', 'Tiger\'s Eye', 'Goldstone', 'Yellow Jasper'],
+    colors: ['Gold', 'Orange', 'Yellow', 'Brown', 'Green'],
+    description: 'Lughnasadh is the first harvest festival, celebrating the ripening of grain and the bounty of the earth. It\'s a time for gratitude, feasting, and honoring the harvest deities.',
+  },
+  {
+    id: 'mabon',
+    name: 'Mabon (Autumn Equinox)',
+    date: 'September 21-22',
+    zodiac: 'Libra',
+    symbols: ['Cornucopia', 'Gourds', 'Apples', 'Wine', 'Autumn Leaves', 'Baskets of Harvest'],
+    animals: ['Stags', 'Owls', 'Bears', 'Salmon'],
+    deities: ['Persephone', 'Demeter', 'Mabon', 'Green Man (as the aging king)'],
+    food: ['Apples', 'Grapes', 'Wine', 'Squash', 'Root Vegetables', 'Nuts', 'Cider'],
+    incense_oils: ['Cinnamon', 'Clove', 'Nutmeg', 'Pine', 'Myrrh', 'Frankincense'],
+    herbs_flowers: ['Oak', 'Maple', 'Pine', 'Ivy', 'Chrysanthemum', 'Marigold'],
+    crystals_stones: ['Sapphire', 'Lapis Lazuli', 'Yellow Jasper', 'Carnelian', 'Smoky Quartz'],
+    colors: ['Brown', 'Orange', 'Red', 'Gold', 'Purple'],
+    description: 'Mabon marks the Autumn Equinox, a time of balance and the second harvest. It is a celebration of abundance, gratitude, and preparing for the darker half of the year.',
+  },
+  {
+    id: 'samhain',
+    name: 'Samhain',
+    date: 'October 31 - November 1',
+    zodiac: 'Scorpio',
+    symbols: ['Pumpkins', 'Apples', 'Bonfires', 'Cauldrons', 'Ancestral Altars', 'Veil between worlds'],
+    animals: ['Cats', 'Owls', 'Bats', 'Spiders', 'Black Dogs'],
+    deities: ['Hecate', 'Morrigan', 'Cernunnos', 'Ancestors', 'Crone Aspects'],
+    food: ['Apples', 'Pomegranates', 'Nuts', 'Squash', 'Soul Cakes', 'Roasted Root Vegetables'],
+    incense_oils: ['Patchouli', 'Myrrh', 'Frankincense', 'Clove', 'Cinnamon', 'Nutmeg'],
+    herbs_flowers: ['Mugwort', 'Wormwood', 'Apple Leaves', 'Chrysanthemum', 'Rosemary'],
+    crystals_stones: ['Obsidian', 'Black Tourmaline', 'Smoky Quartz', 'Onyx', 'Garnet'],
+    colors: ['Black', 'Orange', 'Purple', 'Brown', 'Silver'],
+    description: 'Samhain marks the end of the harvest season and the beginning of winter. It is a time when the veil between the worlds is thinnest, allowing communication with ancestors and spirits. It is a time for remembrance and introspection.',
+  },
 ];
 
 
@@ -364,7 +520,8 @@ const Menu: React.FC<MenuProps> = ({ menuItems, selectedItem, onSelect, isMenuOp
   return (
     <div className={`fixed inset-y-0 left-0 transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}
                     w-64 bg-purple-900 text-purple-200 p-4 shadow-xl transition-transform duration-300 ease-in-out
-                    z-30 sm:relative sm:translate-x-0 sm:w-64 sm:flex-shrink-0`}>
+                    z-30 sm:relative sm:translate-x-0 sm:w-64 sm:flex-shrink-0
+                    overflow-y-auto max-h-screen`}> {/* Added overflow-y-auto and max-h-screen */}
       <div className="flex justify-between items-center mb-6 sm:hidden">
         <h2 className="text-2xl font-bold">Menu</h2>
         <button onClick={onToggleMenu} className="text-purple-200 hover:text-white focus:outline-none text-3xl">
@@ -409,7 +566,11 @@ const Menu: React.FC<MenuProps> = ({ menuItems, selectedItem, onSelect, isMenuOp
                                   {subItem.subItems.map(subSubItem => (
                                     <li key={subSubItem.id} className="mb-1">
                                       <button
-                                        onClick={() => { onSelect(subSubItem.id); onToggleMenu(); }}
+                                        // Pass the specific subSubItem.id to onSelect
+                                        onClick={() => {
+                                          onSelect(subSubItem.id);
+                                          onToggleMenu();
+                                        }}
                                         className={`w-full text-left py-2 px-3 rounded-md text-sm transition-colors duration-200
                                                     ${selectedItem === subSubItem.id ? 'bg-purple-700 text-white font-medium' : 'hover:bg-purple-800'}`}
                                       >
@@ -888,6 +1049,82 @@ const DeitySearchModal: React.FC<DeitySearchModalProps> = ({
   );
 };
 
+// NEW: Holiday Details Modal Component
+interface HolidayDetailsModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  holiday: HolidayData | null;
+  imageUrl: string | null;
+  isLoadingImage: boolean;
+}
+
+const HolidayDetailsModal: React.FC<HolidayDetailsModalProps> = ({
+  isOpen,
+  onClose,
+  holiday,
+  imageUrl,
+  isLoadingImage,
+}) => {
+  if (!isOpen || !holiday) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+      <div className="bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800 max-w-2xl w-full text-center relative max-h-[90vh] overflow-y-auto">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-purple-200 hover:text-white text-3xl font-bold focus:outline-none"
+        >
+          &times;
+        </button>
+        <h3 className="text-3xl font-semibold mb-6 text-purple-200">{holiday.name}</h3>
+
+        <div className="flex flex-col items-center mb-6">
+          {isLoadingImage ? (
+            <div className="w-64 h-64 flex items-center justify-center bg-purple-700 rounded-lg mb-4 border-2 border-purple-600 shadow-lg text-sm text-purple-300">
+              Generating Image...
+            </div>
+          ) : imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={holiday.name}
+              className="w-64 h-64 object-cover rounded-lg mb-4 border-2 border-purple-600 shadow-lg"
+              onError={(e) => {
+                e.currentTarget.src = `https://placehold.co/256x256/7B68EE/FFFFFF?text=${holiday.name}`;
+                console.error(`Failed to load AI image for holiday ${holiday.name}.`);
+              }}
+            />
+          ) : (
+            <div className="w-64 h-64 flex items-center justify-center bg-purple-700 rounded-lg mb-4 border-2 border-purple-600 shadow-lg text-sm text-purple-300">
+              No Image
+            </div>
+          )}
+        </div>
+
+        <div className="text-left text-purple-100 space-y-4">
+          <p className="text-lg"><strong className="text-purple-300">Date:</strong> {holiday.date}</p>
+          <p className="text-lg"><strong className="text-purple-300">Zodiac:</strong> {holiday.zodiac}</p>
+          <p className="text-lg"><strong className="text-purple-300">Description:</strong> {holiday.description}</p>
+          <p className="text-lg"><strong className="text-purple-300">Symbols:</strong> {holiday.symbols.join(', ')}</p>
+          <p className="text-lg"><strong className="text-purple-300">Animals:</strong> {holiday.animals.join(', ')}</p>
+          <p className="text-lg"><strong className="text-purple-300">Deities:</strong> {holiday.deities.join(', ')}</p>
+          <p className="text-lg"><strong className="text-purple-300">Food:</strong> {holiday.food.join(', ')}</p>
+          <p className="text-lg"><strong className="text-purple-300">Incense & Oils:</strong> {holiday.incense_oils.join(', ')}</p>
+          <p className="text-lg"><strong className="text-purple-300">Herbs & Flowers:</strong> {holiday.herbs_flowers.join(', ')}</p>
+          <p className="text-lg"><strong className="text-purple-300">Crystals & Stones:</strong> {holiday.crystals_stones.join(', ')}</p>
+          <p className="text-lg"><strong className="text-purple-300">Colors:</strong> {holiday.colors.join(', ')}</p>
+        </div>
+
+        <button
+          onClick={onClose}
+          className="mt-6 px-6 py-2 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+};
+
 
 function App() {
   const [showHomeScreen, setShowHomeScreen] = useState(true);
@@ -932,6 +1169,12 @@ function App() {
   const [isLoadingSearchedDeityImage, setIsLoadingSearchedDeityImage] = useState(false);
   // NEW: State to control modal visibility for deities
   const [showDeitySearchModal, setShowDeitySearchModal] = useState(false);
+
+  // NEW: State for Holidays
+  const [selectedHoliday, setSelectedHoliday] = useState<HolidayData | null>(null);
+  const [showHolidayDetailsModal, setShowHolidayDetailsModal] = useState(false);
+  const [holidayImage, setHolidayImage] = useState<string | null>(null);
+  const [isLoadingHolidayImage, setIsLoadingHolidayImage] = useState(false);
 
 
   const [readMessage, setReadMessage] = useState('');
@@ -1010,6 +1253,37 @@ function App() {
       setCommonDeityImages(prev => ({ ...prev, [deityId]: 'error' })); // Indicate error state
     } finally {
       setLoadingCommonDeityImages(prev => ({ ...prev, [deityId]: false }));
+    }
+  }, [imageApiUrl]);
+
+  // NEW: Function to fetch AI-generated image for a holiday
+  const fetchHolidayImage = useCallback(async (holidayName: string) => {
+    setIsLoadingHolidayImage(true);
+    setHolidayImage(null); // Clear previous image
+
+    const prompt = `A vibrant and symbolic illustration representing the pagan holiday of ${holidayName}, incorporating its key symbols and colors. For example, for Beltane, show a Maypole with ribbons and flowers. For Yule, show a Yule log and evergreens. For Ostara, show eggs and spring flowers.`;
+
+    try {
+      const payload = { instances: { prompt: prompt }, parameters: { "sampleCount": 1 } };
+      const response = await fetch(imageApiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+
+      if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
+        const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+        setHolidayImage(imageUrl);
+      } else {
+        console.error(`Failed to generate image for ${holidayName}:`, result);
+        setHolidayImage('error'); // Indicate error state
+      }
+    } catch (error) {
+      console.error(`Error generating image for ${holidayName}:`, error);
+      setHolidayImage('error'); // Indicate error state
+    } finally {
+      setIsLoadingHolidayImage(false);
     }
   }, [imageApiUrl]);
 
@@ -1121,7 +1395,7 @@ function App() {
 
     // Process image result
     if (imageResult.status === 'fulfilled' && imageResult.value && imageResult.value.predictions && imageResult.value.predictions.length > 0 && imageResult.value.predictions[0].bytesBase64Encoded) {
-      const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+      const imageUrl = `data:image/png;base64,${imageResult.value.predictions[0].bytesBase64Encoded}`;
       setSearchedCrystalImage(imageUrl);
     } else {
       console.error(`Failed to generate image for ${crystalSearchTerm}:`, imageResult);
@@ -1170,7 +1444,7 @@ function App() {
     setIsLoadingDeityMeaning(false);
 
     if (imageResult.status === 'fulfilled' && imageResult.value && imageResult.value.predictions && imageResult.value.predictions.length > 0 && imageResult.value.predictions[0].bytesBase64Encoded) {
-      const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+      const imageUrl = `data:image/png;base64,${imageResult.value.predictions[0].bytesBase64Encoded}`;
       setSearchedDeityImage(imageUrl);
     } else {
       console.error(`Failed to generate image for ${deitySearchTerm}:`, imageResult);
@@ -1241,11 +1515,45 @@ function App() {
   }, [currentSpreadType]);
 
 
+  // NEW: Function to handle opening holiday details modal
+  const handleOpenHolidayDetails = useCallback((holiday: HolidayData) => {
+    setSelectedHoliday(holiday);
+    setShowHolidayDetailsModal(true);
+    fetchHolidayImage(holiday.name); // Trigger image generation for the selected holiday
+  }, [fetchHolidayImage]);
+
+  // NEW: Function to handle closing holiday details modal
+  const handleCloseHolidayDetails = useCallback(() => {
+    setShowHolidayDetailsModal(false);
+    setSelectedHoliday(null); // Clear selected holiday
+    setHolidayImage(null); // Clear image when closing
+  }, []);
+
   // --- Updated handleMenuItemSelect to manage dynamic spread state ---
+  const handleMenuItemSelect = useCallback((itemId: string) => {
+    // Check if the clicked item is one of the holiday sub-items
+    const isHolidaySubItem = holidaysData.some(holiday => holiday.id === itemId);
+
+    if (isHolidaySubItem) {
+      setSelectedMenuItem('holidays'); // Always navigate to the main holidays section
+      // Find the specific holiday data and open the modal immediately
+      const holidayToOpen = holidaysData.find(h => h.id === itemId);
+      if (holidayToOpen) {
+        handleOpenHolidayDetails(holidayToOpen);
+      }
+    } else {
+      // For all other menu items, set selectedMenuItem directly
+      setSelectedMenuItem(itemId);
+      // Ensure holiday modal is closed if navigating away from holidays
+      setShowHolidayDetailsModal(false);
+      setSelectedHoliday(null);
+      setHolidayImage(null); // Clear holiday image
+    }
+  }, [handleOpenHolidayDetails]); // Dependency on handleOpenHolidayDetails
+
+
+  // Effect to handle state changes when selectedMenuItem changes
   useEffect(() => {
-    // This useEffect ensures that when selectedMenuItem changes,
-    // the current spread states are correctly initialized.
-    // It also acts as the primary trigger for spread changes.
     if (spreadDefinitions[selectedMenuItem]) {
       const initialSpreadDef = spreadDefinitions[selectedMenuItem];
       setCurrentSpreadType(selectedMenuItem);
@@ -1255,12 +1563,19 @@ function App() {
       );
       setReadMessage(''); // Clear messages on new spread selection
       setLlmInterpretation('');
+      // Clear other specific sections if navigating away
+      // No need to clear holiday modal here, as handleMenuItemSelect handles it for non-holiday clicks
+      setCrystalSearchTerm('');
+      setDeitySearchTerm('');
+      setSelectedCardForMeaning('');
     } else if (selectedMenuItem === 'cardMeanings') {
       setSelectedCardForMeaning('');
       setCardMeaningText('Select a card to see its meaning.');
       setCurrentSpreadType(''); // Clear current spread type
       setCurrentSpreadPositions([]);
       setCurrentSpreadSelections([]);
+      setCrystalSearchTerm('');
+      setDeitySearchTerm('');
     } else if (selectedMenuItem === 'crystals') {
       setCrystalSearchTerm('');
       setCrystalMeaningText('Search for any crystal to learn its properties.');
@@ -1270,6 +1585,8 @@ function App() {
       setCurrentSpreadType(''); // Clear spread type
       setCurrentSpreadPositions([]);
       setCurrentSpreadSelections([]);
+      setDeitySearchTerm('');
+      setSelectedCardForMeaning('');
 
       // Trigger image generation for common crystals when Crystals tab is selected
       // Added a delay between requests to avoid rate limiting/overloading the API
@@ -1285,28 +1602,47 @@ function App() {
       setIsLoadingDeityMeaning(false);
       setIsLoadingSearchedDeityImage(false);
       setShowDeitySearchModal(false);
+      setCurrentSpreadType('');
+      setCurrentSpreadPositions([]);
+      setCurrentSpreadSelections([]);
+      setCrystalSearchTerm('');
+      setSelectedCardForMeaning('');
 
       commonDeitiesData.forEach((deity, index) => {
         setTimeout(() => {
           fetchDeityImage(deity.id, deity.name);
         }, index * 1500); // 1.5 second delay
       });
-    }
-    else {
-      // For other non-spread categories, clear spread-related states
+    } else if (selectedMenuItem === 'holidays') { // NEW: Handle Holidays selection (parent category)
       setCurrentSpreadType('');
       setCurrentSpreadPositions([]);
       setCurrentSpreadSelections([]);
       setReadMessage('');
       setLlmInterpretation('');
+      setCrystalSearchTerm('');
+      setDeitySearchTerm('');
+      setSelectedCardForMeaning('');
+      // When navigating to the main holidays tab, ensure modal is closed
+      setShowHolidayDetailsModal(false);
+      setSelectedHoliday(null);
+      setHolidayImage(null); // Clear holiday image too
     }
-  }, [selectedMenuItem, fetchCrystalImage, fetchDeityImage]); // Added fetchDeityImage to dependencies
+    else {
+      // For other non-spread categories, clear all specific states
+      setCurrentSpreadType('');
+      setCurrentSpreadPositions([]);
+      setCurrentSpreadSelections([]);
+      setReadMessage('');
+      setLlmInterpretation('');
+      setShowHolidayDetailsModal(false);
+      setSelectedHoliday(null);
+      setHolidayImage(null);
+      setCrystalSearchTerm('');
+      setDeitySearchTerm('');
+      setSelectedCardForMeaning('');
+    }
+  }, [selectedMenuItem, fetchCrystalImage, fetchDeityImage]);
 
-
-  const handleMenuItemSelect = useCallback((itemId: string) => {
-    setSelectedMenuItem(itemId);
-    // The useEffect above will handle state updates based on selectedMenuItem
-  }, []);
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(prev => !prev);
@@ -1315,10 +1651,25 @@ function App() {
 
   // --- Refactored Render Content Based on Selected Menu Item ---
   const renderContent = () => {
-    const currentItemName = menuItems.find(m => m.id === selectedMenuItem)?.name ||
-                            menuItems.find(m => m.subItems?.some(s => s.id === selectedMenuItem))?.subItems?.find(s => s.id === selectedMenuItem)?.name ||
-                            menuItems.find(m => m.subItems?.some(s => s.subItems?.some(ss => ss.id === selectedMenuItem)))?.subItems?.find(s => s.subItems?.some(ss => ss.id === selectedMenuItem))?.subItems?.find(ss => ss.id === selectedMenuItem)?.name ||
-                            ''; // Added logic to find name for sub-sub-items
+    // Helper function to find the display name for any menu item, including nested ones
+    const getMenuItemDisplayName = (id: string) => {
+      for (const item of menuItems) {
+        if (item.id === id) return item.name;
+        if (item.subItems) {
+          for (const subItem of item.subItems) {
+            if (subItem.id === id) return subItem.name;
+            if (subItem.subItems) {
+              for (const subSubItem of subItem.subItems) {
+                if (subSubItem.id === id) return subSubItem.name;
+              }
+            }
+          }
+        }
+      }
+      return '';
+    };
+
+    const currentItemName = getMenuItemDisplayName(selectedMenuItem);
 
 
     // Render Spread UI if currentSpreadType is set
@@ -1512,7 +1863,7 @@ function App() {
               {witchesRunesData.map(rune => (
                 <div key={rune.id} className="bg-purple-800 p-4 rounded-lg shadow-md border border-purple-700 text-center">
                   <h3 className="text-xl font-semibold text-purple-100 mb-2">{rune.name}</h3>
-                  <p className="text-5xl mb-3">{rune.symbol}</p>
+                  <p className="text-5xl mb-3 font-['Segoe UI Historic']">{rune.symbol}</p>
                   <p className="text-md text-purple-300 leading-relaxed">{rune.description}</p>
                 </div>
               ))}
@@ -1720,6 +2071,40 @@ function App() {
               meaningText={deityMeaningText}
               isLoadingImage={isLoadingSearchedDeityImage}
               isLoadingMeaning={isLoadingDeityMeaning}
+            />
+          </div>
+        );
+
+      // NEW: Holidays Section
+      case 'holidays':
+        return (
+          <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
+            <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Pagan Holidays & Sabbats</h2>
+            <p className="text-md text-purple-300 mb-8 text-center">
+              Explore the eight annual Pagan holidays, known as Sabbats, which mark the turning of the Wheel of the Year.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {holidaysData.map(holiday => (
+                <button
+                  key={holiday.id}
+                  onClick={() => handleOpenHolidayDetails(holiday)}
+                  className="bg-purple-800 p-4 rounded-lg shadow-md border border-purple-700 text-center
+                             hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95
+                             flex flex-col items-center justify-center"
+                >
+                  <h3 className="text-xl font-semibold text-purple-100 mb-2">{holiday.name}</h3>
+                  <p className="text-md text-purple-300">{holiday.date}</p>
+                </button>
+              ))}
+            </div>
+
+            {/* Holiday Details Modal */}
+            <HolidayDetailsModal
+              isOpen={showHolidayDetailsModal}
+              onClose={handleCloseHolidayDetails} // Use the new dedicated close handler
+              holiday={selectedHoliday}
+              imageUrl={holidayImage}
+              isLoadingImage={isLoadingHolidayImage}
             />
           </div>
         );
