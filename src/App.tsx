@@ -968,11 +968,50 @@ const IncenseOilsViewer: React.FC<IncenseOilsViewerProps> = ({ textApiUrl, image
   );
 };
 
-// ... (other viewer components like PalmistryTool, SpellCreatorTool, NumerologyTool, DreamInterpretationTool,
-// ElementsViewer, CardinalPointsViewer, ColourTheoryViewer, AboutResourcesViewer, GuidedMeditationsViewer, AltarSetupViewer, ShintoViewer)
-// These are defined in the previous turn's App.tsx and are now assumed to be in their own files.
-// For the purpose of this response, I'm including them here as a single block for completeness,
-// but in practice, they would be separate files.
+interface HolidaysViewerProps {
+  holidaysData: HolidayData[];
+  handleOpenHolidayDetails: (holiday: HolidayData) => void;
+  showHolidayDetailsModal: boolean;
+  handleCloseHolidayDetails: () => void;
+  selectedHoliday: HolidayData | null;
+  holidayImage: string | null;
+  isLoadingHolidayImage: boolean;
+}
+
+const HolidaysViewer: React.FC<HolidaysViewerProps> = ({
+  holidaysData, handleOpenHolidayDetails, showHolidayDetailsModal,
+  handleCloseHolidayDetails, selectedHoliday, holidayImage, isLoadingHolidayImage
+}) => {
+  return (
+    <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
+      <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Pagan Wheel of the Year</h2>
+      <p className="text-md text-purple-300 mb-8 text-center">
+        Explore the eight Sabbats (holidays) that mark the Pagan Wheel of the Year, celebrating the cycles of nature and the seasons.
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {holidaysData.map(holiday => (
+          <div key={holiday.id} className="bg-purple-800 p-4 rounded-lg shadow-md border border-purple-700 text-center">
+            <h3 className="text-xl font-semibold text-purple-100 mb-2">{holiday.name}</h3>
+            <p className="text-lg text-purple-300 mb-3">{holiday.date}</p>
+            <button
+              onClick={() => handleOpenHolidayDetails(holiday)}
+              className="px-4 py-2 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 text-sm"
+            >
+              View Details
+            </button>
+          </div>
+        ))}
+      </div>
+      <HolidayDetailsModal
+        isOpen={showHolidayDetailsModal}
+        onClose={handleCloseHolidayDetails}
+        holiday={selectedHoliday}
+        imageUrl={holidayImage}
+        isLoadingImage={isLoadingHolidayImage}
+      />
+    </div>
+  );
+};
 
 interface PalmistryToolProps { geminiFlashApiUrl: string; }
 
@@ -1250,7 +1289,7 @@ const CardinalPointsViewer: React.FC<CardinalPointsViewerProps> = ({ selectedMen
   if (!cardinalPointData) return null;
   return (
     <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800 text-center">
-      <h2 className="text-3xl font-semibold mb-6 text-purple-200">{cardinalPointData.name} (Norse Mythology)</h2>
+      <h2 className="text-3xl font-semibold mb-6 text-purple-200">{cardalPointData.name} (Norse Mythology)</h2>
       <div className="text-left text-purple-100 space-y-4">
         <p className="text-lg"><strong className="text-purple-300">Associated Element:</strong> {cardinalPointData.element}</p>
         <p className="text-lg"><strong className="text-purple-300">Direction of:</strong> {cardinalPointData.direction}</p>
@@ -1355,6 +1394,73 @@ const ShintoViewer: React.FC<ShintoViewerProps> = ({ currentItemName }) => (
     </div>
   </div>
 );
+
+
+// Define menuItems here, before App function
+const menuItems: MenuItem[] = [
+  {
+    id: 'tarot',
+    name: 'Tarot Spreads',
+    subItems: [
+      { id: 'celticCross', name: 'Celtic Cross & Staff' },
+      { id: 'threeCard', name: 'Three Card Spread' },
+      { id: 'pastPresentFuture', name: 'Past, Present & Future' },
+      { id: 'starSpread', name: 'Star Spread' },
+      { id: 'heartAndHead', name: 'Heart & Head Spread' },
+      { id: 'treeOfLife', name: 'Tree of Life Spread' },
+      { id: 'horseshoe', name: 'Horseshoe Spread' },
+      { id: 'yearAhead', name: 'Year Ahead Spread' },
+      { id: 'monthAhead', name: 'Month Ahead Spread' },
+      { id: 'weekAhead', name: 'Week Ahead Spread' },
+      { id: 'deckInterview', name: 'Deck Interview Spread' },
+      { id: 'deckBonding', name: 'Deck Bonding Spread' },
+    ],
+  },
+  {
+    id: 'cardMeanings',
+    name: 'Card Meanings',
+  },
+  {
+    id: 'zodiac',
+    name: 'Zodiac Signs',
+    subItems: zodiacSignsData.map(sign => ({ id: sign.id, name: `${sign.name} ${sign.symbol}` })),
+  },
+  {
+    id: 'runes',
+    name: 'Runes',
+    subItems: [
+      { id: 'witchesRunes', name: 'Witches Runes' },
+      { id: 'elderFuthark', name: 'Elder Futhark' },
+      { id: 'youngerFuthark', name: 'Younger Futhark' },
+    ],
+  },
+  {
+    id: 'resources',
+    name: 'Resources & Tools',
+    subItems: [
+      { id: 'crystals', name: 'Crystals' },
+      { id: 'deities', name: 'Deities' },
+      { id: 'herbMagic', name: 'Herb Magic' },
+      { id: 'incenseOils', name: 'Incense & Oils' },
+      { id: 'holidays', name: 'Pagan Holidays' },
+      { id: 'elements', name: 'Elements',
+        subItems: elementsData.map(el => ({ id: el.id, name: el.name }))
+      },
+      { id: 'cardinalPoints', name: 'Cardinal Points',
+        subItems: cardinalPointsData.map(cp => ({ id: cp.id, name: cp.name }))
+      },
+      { id: 'colourTheory', name: 'Colour Theory' },
+      { id: 'palmistry', name: 'Palmistry Tool' },
+      { id: 'spellCreator', name: 'Spell Creator' },
+      { id: 'numerology', name: 'Numerology Tool' },
+      { id: 'dreamInterpretation', name: 'Dream Interpretation' },
+      { id: 'guidedMeditations', name: 'Guided Meditations (Soon)' },
+      { id: 'altarSetup', name: 'Altar Setup Guide (Soon)' },
+      { id: 'shinto', name: 'Shinto (Brief Overview)' },
+      { id: 'aboutResources', name: 'About & Resources' },
+    ],
+  },
+];
 
 
 // --- Main App Component ---
