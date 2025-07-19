@@ -42,7 +42,8 @@ const zodiacSignsData = [
   { id: 'cancer', name: 'Cancer', symbol: '♋', description: 'Cancer is a Water sign ruled by the Moon, representing emotions, nurturing, and home. Cancers are deeply empathetic, intuitive, and protective of their loved ones. They can be sensitive and prone to mood swings, but offer immense comfort and support.' },
   { id: 'leo', name: 'Leo', symbol: '♌', description: 'Leo, a Fire sign ruled by the Sun, embodies confidence, charisma, and generosity. Leos love to be the center of attention, are natural performers, and possess a warm, vibrant energy. They are fiercely loyal but can also be proud and dramatic.' },
   { id: 'virgo', name: 'Virgo', symbol: '♍', description: 'Virgo is an Earth sign ruled by Mercury, known for its practicality, analytical mind, and meticulous nature. Virgos are hardworking, organized, and always striving for perfection. They can be critical, but their desire to serve and improve is strong.' },
-  { id: 'libra', name: 'Libra', symbol: '♎', description: 'Libra, an Air sign ruled by Venus, symbolizes balance, harmony, and justice. Librans are charming, diplomatic, and seek fairness in all aspects of life. They value relationships and beauty, but can be indecisive and avoid confrontation.' thoại: 'Scorpio is a Water sign ruled by Pluto (and Mars), representing intensity, transformation, and power. Scorpios are passionate, mysterious, and deeply emotional, with a strong intuition. They are fiercely determined but can also be secretive and possessive.' },
+  { id: 'libra', name: 'Libra', symbol: '♎', description: 'Libra, an Air sign ruled by Venus, symbolizes balance, harmony, and justice. Librans are charming, diplomatic, and seek fairness in all aspects of life. They value relationships and beauty, but can be indecisive and avoid confrontation.' },
+  { id: 'scorpio', name: 'Scorpio', symbol: '♏', description: 'Scorpio is a Water sign ruled by Pluto (and Mars), representing intensity, transformation, and power. Scorpios are passionate, mysterious, and deeply emotional, with a strong intuition. They are fiercely determined but can also be secretive and possessive.' },
   { id: 'sagittarius', name: 'Sagittarius', symbol: '♐', description: 'Sagittarius, a Fire sign ruled by Jupiter, embodies adventure, optimism, and a love for freedom. Sagittarians are philosophical, enthusiastic, and always seeking new experiences. They are honest but can be tactless and restless.' },
   { id: 'capricorn', name: 'Capricorn', symbol: '♑', description: 'Capricorn is an Earth sign ruled by Saturn, symbolizing discipline, ambition, and responsibility. Capricorns are practical, patient, and driven to achieve their goals. They are reliable but can be rigid and overly serious.' },
   { id: 'aquarius', name: 'Aquarius', symbol: '♒', description: 'Aquarius, an Air sign ruled by Uranus (and Saturn), represents innovation, independence, and humanitarianism. Aquarians are intellectual, progressive, and value freedom and equality. They can be eccentric and detached but are visionaries.' },
@@ -117,7 +118,7 @@ const Menu: React.FC<MenuProps> = ({ menuItems, selectedItem, onSelect, isMenuOp
                     z-30 sm:relative sm:translate-x-0 sm:w-64 sm:flex-shrink-0 overflow-y-auto max-h-screen`}>
       <div className="flex justify-between items-center mb-6 sm:hidden">
         <h2 className="text-2xl font-bold">Menu</h2>
-        <button onClick={onToggleMenu} className="text-purple-200 hover:text-white focus:outline-none text-3xl">
+        <button onClick={onToggleMenu} className="text-purple-200 hover:text-white text-3xl font-bold focus:outline-none">
           &times;
         </button>
       </div>
