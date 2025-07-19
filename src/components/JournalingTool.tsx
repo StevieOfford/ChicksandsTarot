@@ -1,8 +1,18 @@
-// @ts-ignore
+// src/components/JournalingTool.tsx
 import React, { useState, useEffect, useCallback } from 'react';
-// Corrected import path: go up one level (from components to src), then find firebaseConfig
-import { db, auth, initializeFirebase, getUserId } from '../firebaseConfig';
-import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, deleteDoc, doc } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs } from 'firebase/firestore';
+
+// Ensure these global variables are accessible in the React component context
+// @ts-ignore
+declare const __app_id: string;
+// @ts-ignore
+declare const __firebase_config: string;
+// @ts-ignore
+declare const __initial_auth_token: string;
+
+// ... rest of your JournalingTool.tsx code
 
 // Define the structure for a journal entry
 interface JournalEntry {
