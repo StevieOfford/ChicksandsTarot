@@ -1,78 +1,48 @@
+// src/firebaseConfig.ts
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, User } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, Firestore, collection, query, orderBy, onSnapshot, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
+import { getAuth, Auth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, User } from 'firebase/auth';
 
-// Global variables provided by the Canvas environment or default values for local/deployed.
-// These are necessary for Firebase to connect.
-declare const __app_id: string | undefined;
-declare const __firebase_config: string | undefined;
+// Define global variables as they are injected by Canvas and used by the app
+declare const __app_id: string;
+declare const __firebase_config: string;
 declare const __initial_auth_token: string | undefined;
 
-let app: any;
-let db: any;
-let auth: any;
-let currentUserId: string | null = null;
-let isAuthReady: boolean = false;
+let app: any; // Firebase App instance
+export let db: Firestore; // Export db instance
+export let auth: Auth; // Export auth instance
 
-// Function to initialize Firebase and set up authentication
-export const initializeFirebase = async () => {
-  if (isAuthReady && app && db && auth) {
-    console.log("[Firebase] Already initialized and authenticated.");
-    return;
-  }
-
-  console.log("[Firebase] Initializing Firebase...");
-
-  const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-  const firebaseConfig = typeof __firebase_config !== 'undefined'
-    ? JSON.parse(__firebase_config)
-    : {
-        // Provide a bare minimum config for local dev if not running in Canvas
-        // For actual deployment, Firebase needs valid config here or via env vars
-        apiKey: "YOUR_FIREBASE_API_KEY_FOR_PROD", // Replace with actual Firebase Web API Key for deployed app
-        authDomain: "YOUR_FIREBASE_PROJECT_ID.firebaseapp.com",
-        projectId: "YOUR_FIREBASE_PROJECT_ID",
-        storageBucket: "YOUR_FIREBASE_PROJECT_ID.appspot.com",
-        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-        appId: appId // Use the runtime appId
-      };
-
+// This function initializes Firebase and performs initial authentication
+export async function initializeFirebase() {
+  console.log('[FirebaseConfig] Initializing Firebase...');
   try {
+    const firebaseConfig = JSON.parse(__firebase_config);
     app = initializeApp(firebaseConfig);
     db = getFirestore(app);
     auth = getAuth(app);
 
-    // Set up auth state listener
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        currentUserId = user.uid;
-        console.log("[Firebase] User authenticated:", currentUserId);
-      } else {
-        currentUserId = null;
-        console.log("[Firebase] User unauthenticated.");
-      }
-      isAuthReady = true;
-    });
-
-    // Sign in anonymously or with custom token
+    // Initial sign-in (anonymous or custom token)
     if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-      console.log("[Firebase] Signing in with custom token...");
+      console.log('[FirebaseConfig] Signing in with custom token...');
       await signInWithCustomToken(auth, __initial_auth_token);
     } else {
-      console.log("[Firebase] Signing in anonymously...");
+      console.log('[FirebaseConfig] Signing in anonymously...');
       await signInAnonymously(auth);
     }
-
-    console.log("[Firebase] Firebase initialization complete.");
+    console.log('[FirebaseConfig] Firebase initialized and authenticated.');
   } catch (error) {
-    console.error("[Firebase] Firebase initialization failed:", error);
-    // You might want to display an error message to the user here
+    console.error('[FirebaseConfig] Error initializing Firebase:', error);
+    // Propagate error if needed, or handle it
+    throw error; // Re-throw to be caught by JournalingTool
   }
+}
+
+// Utility function to get the current user ID
+export const getUserId = (): string | null => {
+  return auth.currentUser ? auth.currentUser.uid : null;
 };
 
-// Functions to expose Firebase instances and user ID
-export const getDb = () => db;
-export const getAuthInstance = () => auth; // Renamed to avoid conflict with `auth` variable
-export const getUserId = () => currentUserId;
-export const getIsAuthReady = () => isAuthReady;
-
+// Ensure Firebase is initialized (important for Canvas runtime)
+// This pattern ensures the initialization function is called, but is not part of a React lifecycle in App.tsx
+// It's more of a global setup.
+initializeFirebase().catch(e => console.error("Firebase Init failed globally:", e));

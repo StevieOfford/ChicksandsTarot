@@ -248,7 +248,7 @@ const JournalingTool: React.FC = () => {
                 {entry.timestamp ? new Date(entry.timestamp.toDate()).toLocaleString() : 'N/A'}
               </span>
             </div>
-            <p className className="text-md text-purple-200 whitespace-pre-wrap mb-3">{entry.content}</p>
+            <p className="text-md text-purple-200 whitespace-pre-wrap mb-3">{entry.content}</p>
             <div className="flex justify-end gap-2">
               <button onClick={() => editEntry(entry)} className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm">Edit</button>
               <button onClick={() => deleteEntry(entry.id)} className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm">Delete</button>
