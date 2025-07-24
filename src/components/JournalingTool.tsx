@@ -11,7 +11,8 @@ interface JournalEntry {
   timestamp: any; // Firestore Timestamp
 }
 
-const JournalingTool: React.FC = () => {
+const JournalingTool: React.FC = () => { /* ... */ };
+export default JournalingTool; // ADD THIS LINE at the very end of the file
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
