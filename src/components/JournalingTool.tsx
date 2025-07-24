@@ -1,232 +1,261 @@
-// src/components/JournalingTool.tsx
 import React, { useState, useEffect, useCallback } from 'react';
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs } from 'firebase/firestore';
+import { initializeFirebase, db, auth, getUserId } from '../firebaseConfig'; // Import Firebase setup and utils
+import { collection, query, orderBy, onSnapshot, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore'; // Firebase Firestore imports
+import { onAuthStateChanged } from 'firebase/auth'; // Firebase Auth for auth state changes
 
-// Ensure these global variables are accessible in the React component context
-// @ts-ignore
-declare const __app_id: string;
-// @ts-ignore
-declare const __firebase_config: string;
-// @ts-ignore
-declare const __initial_auth_token: string;
-
-// ... rest of your JournalingTool.tsx code
-
-// Define the structure for a journal entry
 interface JournalEntry {
   id: string;
-  userId: string; // To identify the user who created the entry
+  userId: string;
   title: string;
   content: string;
-  timestamp: any; // Firebase Timestamp type
+  timestamp: any; // Firestore Timestamp
 }
 
 const JournalingTool: React.FC = () => {
+  const [isAuthReady, setIsAuthReady] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [newEntryTitle, setNewEntryTitle] = useState('');
   const [newEntryContent, setNewEntryContent] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [currentUserId, setCurrentUserId] = useState<string | null>(null); // State to hold the authenticated user ID
-  const [isAuthReady, setIsAuthReady] = useState(false); // State to track Firebase auth readiness
+  const [editingEntryId, setEditingEntryId] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  // Initialize Firebase and set up auth listener
+  // Initialize Firebase and set up auth listener on component mount
   useEffect(() => {
-    console.log('[JournalingTool] Initializing Firebase and setting up auth listener...');
+    let unsubscribeAuth: () => void;
+    let unsubscribeFirestore: () => void;
+
     const setupFirebase = async () => {
       try {
-        await initializeFirebase();
+        console.log('[JournalingTool] Initializing Firebase and setting up auth listener...');
+        await initializeFirebase(); // Initialize Firebase
         console.log('[JournalingTool] Firebase initialized.');
-        // Listen for auth state changes
-        const unsubscribe = auth.onAuthStateChanged(user => {
+
+        unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
+          console.log('[JournalingTool] Auth state changed. User:', user);
           if (user) {
-            setCurrentUserId(user.uid);
-            console.log(`[JournalingTool] User authenticated: ${user.uid}`);
+            const currentUserId = getUserId(); // Get the authenticated user ID
+            setUserId(currentUserId);
+            setIsAuthReady(true);
+            console.log(`[JournalingTool] Authenticated. User ID: ${currentUserId}`);
+
+            // Set up Firestore listener *after* auth is ready and user ID is known
+            const q = query(
+              collection(db, `artifacts/${__app_id}/users/${currentUserId}/journal`),
+              orderBy("timestamp", "desc") // Order by timestamp
+            );
+
+            unsubscribeFirestore = onSnapshot(q, (snapshot) => {
+              const entries: JournalEntry[] = [];
+              snapshot.forEach(doc => {
+                entries.push({ id: doc.id, ...doc.data() } as JournalEntry);
+              });
+              setJournalEntries(entries);
+              console.log(`[JournalingTool] Fetched ${entries.length} journal entries.`);
+            }, (error) => {
+              console.error("[JournalingTool] Firestore snapshot error:", error);
+              setErrorMessage("Failed to fetch journal entries. Please check console for details.");
+            });
+
           } else {
-            setCurrentUserId(null);
-            console.log('[JournalingTool] User not authenticated.');
+            setUserId(null);
+            setIsAuthReady(true); // Still set ready, even if not authenticated, to allow anonymous sign-in logic to proceed
+            setJournalEntries([]);
+            console('[JournalingTool] Not authenticated. currentUserId: null');
           }
-          setIsAuthReady(true); // Auth state has been checked at least once
         });
-        return () => unsubscribe(); // Cleanup auth listener on unmount
-      } catch (err) {
-        console.error('[JournalingTool] Firebase initialization error:', err);
-        setError('Failed to initialize Firebase. Please check your configuration.');
-        setIsAuthReady(true);
+      } catch (error) {
+        console.error('[JournalingTool] Firebase initialization error:', error);
+        setErrorMessage('Failed to initialize Firebase. Please check your configuration.');
+        setIsAuthReady(false); // Firebase initialization failed
       }
     };
 
     setupFirebase();
-  }, []); // Run only once on component mount
 
-  // Fetch journal entries when auth state is ready and currentUserId is set
+    // Cleanup listeners on unmount
+    return () => {
+      console.log('[JournalingTool] Cleaning up Firebase listeners...');
+      if (unsubscribeAuth) { unsubscribeAuth(); }
+      if (unsubscribeFirestore) { unsubscribeFirestore(); }
+    };
+  }, []); // Empty dependency array means this runs once on mount
+
+  // Check if Firebase is ready before performing operations
   useEffect(() => {
-    if (!isAuthReady || !currentUserId) {
-      console.log('[JournalingTool] Not ready to fetch: isAuthReady:', isAuthReady, 'currentUserId:', currentUserId);
-      setJournalEntries([]); // Clear entries if not authenticated or ready
-      setIsLoading(false);
-      return;
+    if (!isAuthReady) {
+      console.log(`[JournalingTool] Not ready to fetch: isAuthReady: ${isAuthReady}`);
     }
+  }, [isAuthReady]);
 
-    console.log(`[JournalingTool] Fetching journal entries for user: ${currentUserId}`);
-    setIsLoading(true);
-    setError(null);
+  const addOrUpdateEntry = useCallback(async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage('');
+    setSuccessMessage('');
 
-    // Define the collection path based on the user's ID
-    // __app_id is a global variable provided by the Canvas environment
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-    const journalCollectionRef = collection(db, `artifacts/${appId}/users/${currentUserId}/journal`);
-    const q = query(journalCollectionRef, orderBy('timestamp', 'desc')); // Order by timestamp descending
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const entries: JournalEntry[] = [];
-      snapshot.forEach(doc => {
-        entries.push({ id: doc.id, ...doc.data() } as JournalEntry);
-      });
-      setJournalEntries(entries);
-      setIsLoading(false);
-      console.log(`[JournalingTool] Fetched ${entries.length} journal entries.`);
-    }, (err) => {
-      console.error('[JournalingTool] Error fetching journal entries:', err);
-      setError('Failed to load journal entries. Please try again.');
-      setIsLoading(false);
-    });
-
-    return () => unsubscribe(); // Cleanup listener on unmount or when currentUserId changes
-  }, [isAuthReady, currentUserId]); // Re-run when auth state or user ID changes
-
-  const handleAddEntry = useCallback(async () => {
-    if (!currentUserId) {
-      setError('You must be logged in to add journal entries.');
+    if (!userId || !db) {
+      setErrorMessage('Not authenticated or Firebase not fully initialized. Journal entries will not be saved. Please ensure Firebase is configured correctly.');
       return;
     }
     if (!newEntryTitle.trim() || !newEntryContent.trim()) {
-      setError('Title and content cannot be empty.');
+      setErrorMessage('Title and content cannot be empty.');
       return;
     }
 
-    setError(null);
     try {
-      console.log('[JournalingTool] Adding new journal entry...');
-      const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-      await addDoc(collection(db, `artifacts/${appId}/users/${currentUserId}/journal`), {
-        title: newEntryTitle,
-        content: newEntryContent,
-        timestamp: serverTimestamp(), // Use server timestamp for consistency
-        userId: currentUserId,
-      });
+      if (editingEntryId) {
+        // Update existing entry
+        await updateDoc(doc(db, `artifacts/${__app_id}/users/${userId}/journal`, editingEntryId), {
+          title: newEntryTitle.trim(),
+          content: newEntryContent.trim(),
+          timestamp: new Date(), // Update timestamp on edit
+        });
+        setSuccessMessage('Entry updated successfully!');
+      } else {
+        // Add new entry
+        await addDoc(collection(db, `artifacts/${__app_id}/users/${userId}/journal`), {
+          title: newEntryTitle.trim(),
+          content: newEntryContent.trim(),
+          timestamp: new Date(),
+          userId: userId, // Store userId for security rules
+        });
+        setSuccessMessage('Entry added successfully!');
+      }
       setNewEntryTitle('');
       setNewEntryContent('');
-      console.log('[JournalingTool] Journal entry added successfully.');
-    } catch (err) {
-      console.error('[JournalingTool] Error adding journal entry:', err);
-      setError('Failed to add entry. Please try again.');
+      setEditingEntryId(null);
+    } catch (error) {
+      console.error('Error adding/updating entry:', error);
+      setErrorMessage('Failed to save entry. Please check console for details.');
     }
-  }, [currentUserId, newEntryTitle, newEntryContent]);
+  }, [userId, newEntryTitle, newEntryContent, editingEntryId]);
 
-  const handleDeleteEntry = useCallback(async (id: string) => {
-    if (!currentUserId) {
-      setError('You must be logged in to delete journal entries.');
+  const editEntry = useCallback((entry: JournalEntry) => {
+    setNewEntryTitle(entry.title);
+    setNewEntryContent(entry.content);
+    setEditingEntryId(entry.id);
+    setErrorMessage('');
+    setSuccessMessage('');
+  }, []);
+
+  const deleteEntry = useCallback(async (entryId: string) => {
+    setErrorMessage('');
+    setSuccessMessage('');
+    if (!userId || !db) {
+      setErrorMessage('Not authenticated or Firebase not fully initialized.');
       return;
     }
-    setError(null);
-    try {
-      console.log(`[JournalingTool] Deleting journal entry with ID: ${id}`);
-      const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-      await deleteDoc(doc(db, `artifacts/${appId}/users/${currentUserId}/journal`, id));
-      console.log(`[JournalingTool] Journal entry ${id} deleted successfully.`);
-    } catch (err) {
-      console.error('[JournalingTool] Error deleting journal entry:', err);
-      setError('Failed to delete entry. Please try again.');
+    if (window.confirm('Are you sure you want to delete this entry?')) {
+      try {
+        await deleteDoc(doc(db, `artifacts/${__app_id}/users/${userId}/journal`, entryId));
+        setSuccessMessage('Entry deleted successfully!');
+      } catch (error) {
+        console.error('Error deleting entry:', error);
+        setErrorMessage('Failed to delete entry. Please check console for details.');
+      }
     }
-  }, [currentUserId]);
+  }, [userId]);
+
 
   return (
     <div className="w-full max-w-4xl bg-purple-950 p-6 sm:p-8 rounded-xl shadow-2xl border border-purple-800">
       <h2 className="text-3xl font-semibold mb-6 text-center text-purple-200">Your Spiritual Journal</h2>
-      <p className="text-md text-purple-300 mb-6 text-center">
-        Record your tarot readings, dream interpretations, spiritual insights, and personal reflections here.
-        Your entries are private to you.
-      </p>
+      <p className="text-md text-purple-300 mb-6 text-center">Record your tarot readings, dream interpretations, spiritual insights, and personal reflections here. Your entries are private to you.</p>
+
+      {/* Authentication Status */}
+      {!isAuthReady && (
+        <div className="bg-orange-800 p-4 rounded-lg shadow-inner text-orange-100 mb-6 text-center">
+          <p className="text-lg">Initializing Firebase... Please wait.</p>
+        </div>
+      )}
+
+      {isAuthReady && !userId && (
+        <div className="bg-red-800 p-4 rounded-lg shadow-inner text-red-100 mb-6 text-center">
+          <p className="text-lg font-bold">Not authenticated. Journal entries will not be saved. Please ensure Firebase is configured correctly.</p>
+          <p className="text-sm text-red-200 mt-2">Attempting anonymous sign-in...</p>
+        </div>
+      )}
+
+      {errorMessage && (
+        <div className="bg-red-800 p-4 rounded-lg shadow-inner text-red-100 mb-6">
+          <p className="text-lg">{errorMessage}</p>
+        </div>
+      )}
+      {successMessage && (
+        <div className="bg-green-800 p-4 rounded-lg shadow-inner text-green-100 mb-6">
+          <p className="text-lg">{successMessage}</p>
+        </div>
+      )}
 
       {/* User ID Display */}
-      {isAuthReady && currentUserId && (
-        <div className="bg-purple-800 p-3 rounded-lg mb-6 text-center text-purple-200 text-sm">
-          Logged in as: <span className="font-mono text-purple-100 break-all">{currentUserId}</span>
-        </div>
-      )}
-      {isAuthReady && !currentUserId && (
-        <div className="bg-red-800 p-3 rounded-lg mb-6 text-center text-red-100 text-sm">
-          Not authenticated. Journal entries will not be saved. Please ensure Firebase is configured correctly.
+      {isAuthReady && userId && (
+        <div className="bg-purple-800 p-3 rounded-lg shadow-inner text-purple-200 mb-6 text-center">
+          <p className="text-sm">Logged in as: <strong className="text-white">{userId}</strong></p>
         </div>
       )}
 
-
-      {error && (
-        <div className="bg-red-800 p-4 rounded-lg shadow-inner text-red-100 mb-6">
-          <p className="text-lg">{error}</p>
-        </div>
-      )}
-
-      {/* Add New Entry Form */}
-      <div className="mb-10 pb-8 border-b border-purple-700">
-        <h3 className="text-2xl font-semibold mb-4 text-purple-200 text-center">Add New Entry</h3>
+      {/* Add/Edit Entry Form */}
+      <form onSubmit={addOrUpdateEntry} className="mb-10 p-6 bg-purple-900 rounded-xl border border-purple-700 shadow-lg">
+        <h3 className="text-2xl font-semibold mb-4 text-purple-200">{editingEntryId ? 'Edit Journal Entry' : 'Add New Entry'}</h3>
         <input
           type="text"
           placeholder="Entry Title"
-          className="w-full p-3 mb-4 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
           value={newEntryTitle}
           onChange={(e) => setNewEntryTitle(e.target.value)}
-          disabled={!currentUserId}
+          className="w-full p-3 mb-4 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
+          disabled={!isAuthReady}
         />
         <textarea
           placeholder="Write your thoughts, readings, or dreams here..."
-          className="w-full p-3 mb-4 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg h-32 resize-y"
           value={newEntryContent}
           onChange={(e) => setNewEntryContent(e.target.value)}
-          disabled={!currentUserId}
+          className="w-full p-3 mb-4 bg-purple-800 text-white rounded-md border border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg h-40 resize-y"
+          disabled={!isAuthReady}
         ></textarea>
-        <button
-          onClick={handleAddEntry}
-          disabled={!currentUserId || !newEntryTitle.trim() || !newEntryContent.trim()}
-          className="w-full px-6 py-3 bg-green-600 text-white font-bold rounded-lg shadow-lg hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          Add Journal Entry
-        </button>
-      </div>
+        <div className="flex justify-center gap-4">
+          <button
+            type="submit"
+            className="px-6 py-3 bg-green-600 text-white font-bold rounded-lg shadow-lg hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 text-lg"
+            disabled={!isAuthReady || !newEntryTitle.trim() || !newEntryContent.trim()}
+          >
+            {editingEntryId ? 'Update Entry' : 'Save Entry'}
+          </button>
+          {editingEntryId && (
+            <button
+              type="button"
+              onClick={() => { setNewEntryTitle(''); setNewEntryContent(''); setEditingEntryId(null); setErrorMessage(''); setSuccessMessage(''); }}
+              className="px-6 py-3 bg-gray-600 text-white font-bold rounded-lg shadow-lg hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 text-lg"
+              disabled={!isAuthReady}
+            >
+              Cancel Edit
+            </button>
+          )}
+        </div>
+      </form>
 
       {/* Journal Entries List */}
-      <div className="mt-10">
-        <h3 className="text-2xl font-semibold mb-4 text-purple-200 text-center">Your Entries</h3>
-        {isLoading ? (
-          <p className="text-center text-purple-300 text-lg">Loading journal entries...</p>
-        ) : journalEntries.length === 0 ? (
-          <p className="text-center text-purple-300 text-lg">No entries yet. Add your first entry above!</p>
-        ) : (
-          <div className="space-y-6">
-            {journalEntries.map(entry => (
-              <div key={entry.id} className="bg-purple-800 p-5 rounded-lg shadow-md border border-purple-700 relative">
-                <h4 className="text-xl font-semibold text-purple-100 mb-2">{entry.title}</h4>
-                <p className="text-sm text-purple-400 mb-3">
-                  {entry.timestamp ? new Date(entry.timestamp.toDate()).toLocaleString() : 'Saving...'}
-                </p>
-                <p className="text-md text-purple-300 whitespace-pre-wrap leading-relaxed mb-4">{entry.content}</p>
-                <button
-                  onClick={() => handleDeleteEntry(entry.id)}
-                  className="absolute top-3 right-3 text-red-400 hover:text-red-600 text-2xl focus:outline-none"
-                  title="Delete Entry"
-                >
-                  &times;
-                </button>
-              </div>
-            ))}
+      <h3 className="text-2xl font-semibold mb-4 text-purple-200 text-center">My Entries</h3>
+      {journalEntries.length === 0 && isAuthReady && (
+        <p className="text-lg text-purple-400 text-center">No entries yet. Add your first entry above!</p>
+      )}
+      <div className="space-y-4">
+        {journalEntries.map(entry => (
+          <div key={entry.id} className="bg-purple-800 p-4 rounded-lg shadow-md border border-purple-700">
+            <div className="flex justify-between items-center mb-2">
+              <h4 className="text-xl font-semibold text-purple-100">{entry.title}</h4>
+              <span className="text-sm text-purple-300">
+                {entry.timestamp ? new Date(entry.timestamp.toDate()).toLocaleString() : 'N/A'}
+              </span>
+            </div>
+            <p className className="text-md text-purple-200 whitespace-pre-wrap mb-3">{entry.content}</p>
+            <div className="flex justify-end gap-2">
+              <button onClick={() => editEntry(entry)} className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm">Edit</button>
+              <button onClick={() => deleteEntry(entry.id)} className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm">Delete</button>
+            </div>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );
 };
-
-export default JournalingTool;
